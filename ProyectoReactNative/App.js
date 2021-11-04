@@ -1,15 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import Menu from './src/components/Menu';
 
-export default function App() {
+function App() {
   return (
-    <View >
-     
-    </View>
+    
+    <Menu> </Menu>
   );
 }
 
-const styles = StyleSheet.create({
-  
-});
+
+export default App;

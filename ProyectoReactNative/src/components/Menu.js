@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer'; 
 import { auth } from '../firebase/config';
+import Register from '../screens/register';
 
 
 
@@ -12,7 +13,7 @@ class Menu extends Component {
     constructor() {
         super();
         this.state = {
-            hola: ''
+           
         }
     }
 
@@ -24,7 +25,7 @@ class Menu extends Component {
             .catch(error => {
                 console.log(error)
                 this.setState({
-                    errorRegister: error.message
+                    // errorRegister: error.message
                 })
             })
     }
@@ -33,12 +34,12 @@ class Menu extends Component {
         return (
             <NavigationContainer>
                 <Drawer.Navigator>
-                    {/* <Drawer.Screen name="Registro" component={() => <Register register={(email, pass) => this.register(email, pass)} />} />
-                    <Drawer.Screen name="Home" component={() => <Home />} />
+                    <Drawer.Screen name="Registro" component={() => <Register register={(email, pass) => this.register(email, pass)} />} />
+                    {/* <Drawer.Screen name="Home" component={() => <Home />} />
                     <Drawer.Screen name="Login" component={() => <Login />} />
                     <Drawer.Screen name="Profile" component={() => <Profile />} />
                     <Drawer.Screen name="New Post" component={() => <Posts />} />
-                    <Drawer.Screen name="Search" component={() => <Search />} /> */}
+                    <Drawer.Screen name="Search" component={() => <Search />} /> */} 
                 </Drawer.Navigator>
             </NavigationContainer>
         )
