@@ -13,6 +13,7 @@ class Menu extends Component {
     constructor() {
         super();
         this.state = {
+            errorRegister: '',
            
         }
     }
@@ -21,11 +22,14 @@ class Menu extends Component {
         auth.createUserWithEmailAndPassword(email, pass)
             .then(() => {
                 console.log('registrado')
+                this.setState({
+                    errorRegister:''
+                })
             })
             .catch(error => {
                 console.log(error)
                 this.setState({
-                    // errorRegister: error.message
+                    errorRegister: error.message
                 })
             })
     }
@@ -34,7 +38,7 @@ class Menu extends Component {
         return (
             <NavigationContainer>
                 <Drawer.Navigator>
-                    <Drawer.Screen name="Registro" component={() => <Register register={(email, pass) => this.register(email, pass)} />} />
+                    <Drawer.Screen name="Registro" component={() => <Register register={(email, pass) => this.register(email, pass)} errorRegister= {this.state.errorRegister} />} />
                     {/* <Drawer.Screen name="Home" component={() => <Home />} />
                     <Drawer.Screen name="Login" component={() => <Login />} />
                     <Drawer.Screen name="Profile" component={() => <Profile />} />

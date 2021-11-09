@@ -32,9 +32,17 @@ class Register extends Component {
                     keyboardType='email-address'
                     secureTextEntry={true}
                 />
+
+                {this.state.email && this.state.userName && this.state.password ?
                 <TouchableOpacity style={styles.button} onPress={() => this.props.register(this.state.email, this.state.password)} >
-                    <Text style={styles.textButton}>Registrarse</Text>
+                    <Text style={styles.textButton}>Register</Text>
+                </TouchableOpacity> : 
+                <TouchableOpacity style={styles.button} disabled={true} >
+                <Text style={styles.textButton}>I'm disabled</Text>
                 </TouchableOpacity>
+                }
+
+                <Text> {this.props.errorRegister} </Text>
             </View>
         )
     }
