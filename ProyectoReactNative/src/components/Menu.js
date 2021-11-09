@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer'; 
 import { auth } from '../firebase/config';
 import Register from '../screens/register';
+import Login from '../screens/login';
 
 
 
@@ -14,6 +15,7 @@ class Menu extends Component {
         super();
         this.state = {
             errorRegister: '',
+            errorLogin: '',
            
         }
     }
@@ -33,14 +35,36 @@ class Menu extends Component {
                 })
             })
     }
+
+    login(email, pass){
+        auth.signInWithEmailAndPassword(email, pass) 
+            .then((response) =>{
+                
+                console.log(response);
+                this.setState({
+                    logueado: true,
+                    userData: response.user,
+                    errorLogin: '',
+                    
+                })
+            })
+
+            .catch(error => {
+                console.log(error)
+                this.setState({
+                    errorLogin: error.message
+                })
+            })
+    }
+
      
     render() {
         return (
             <NavigationContainer>
                 <Drawer.Navigator>
                     <Drawer.Screen name="Registro" component={() => <Register register={(email, pass) => this.register(email, pass)} errorRegister= {this.state.errorRegister} />} />
+                    <Drawer.Screen name ="Login" component={()=> <Login login={(email, pass)=> this.login(email, pass)} errorLogin={this.state.errorLogin}/>}/>
                     {/* <Drawer.Screen name="Home" component={() => <Home />} />
-                    <Drawer.Screen name="Login" component={() => <Login />} />
                     <Drawer.Screen name="Profile" component={() => <Profile />} />
                     <Drawer.Screen name="New Post" component={() => <Posts />} />
                     <Drawer.Screen name="Search" component={() => <Search />} /> */} 
