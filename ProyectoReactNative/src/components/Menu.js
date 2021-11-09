@@ -5,6 +5,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { auth } from '../firebase/config';
 import Register from '../screens/register';
 import Login from '../screens/login';
+import Profile from '../screens/profile';
 
 
 
@@ -16,6 +17,8 @@ class Menu extends Component {
         this.state = {
             errorRegister: '',
             errorLogin: '',
+            logueado: false,
+            user: '',
            
         }
     }
@@ -43,7 +46,7 @@ class Menu extends Component {
                 console.log(response);
                 this.setState({
                     logueado: true,
-                    userData: response.user,
+                    user: response.user,
                     errorLogin: '',
                     
                 })
@@ -57,18 +60,31 @@ class Menu extends Component {
             })
     }
 
+    logout(){
+        auth.signOut()
+            .then( (res)=>{
+                this.setState({
+                    user:'',
+                    logueado: false,
+                })
+            })
+            .catch()
+    }
+
      
     render() {
         return (
             <NavigationContainer>
+                {this.state.logueado == false ?
                 <Drawer.Navigator>
                     <Drawer.Screen name="Registro" component={() => <Register register={(email, pass) => this.register(email, pass)} errorRegister= {this.state.errorRegister} />} />
                     <Drawer.Screen name ="Login" component={()=> <Login login={(email, pass)=> this.login(email, pass)} errorLogin={this.state.errorLogin}/>}/>
-                    {/* <Drawer.Screen name="Home" component={() => <Home />} />
-                    <Drawer.Screen name="Profile" component={() => <Profile />} />
-                    <Drawer.Screen name="New Post" component={() => <Posts />} />
-                    <Drawer.Screen name="Search" component={() => <Search />} /> */} 
-                </Drawer.Navigator>
+                </Drawer.Navigator>:
+                <Drawer.Navigator>
+                    {/*<Drawer.Screen name="Home" component={()=><Home />} />
+                     <Drawer.Screen name ="New Post" component={(drawerProps)=><PostForm drawerProps={drawerProps}/>}/>*/}
+                    <Drawer.Screen name="Profile" component={()=><Profile userData={this.state.user} logout={()=>this.logout() } />} />
+                </Drawer.Navigator>}
             </NavigationContainer>
         )
     }
