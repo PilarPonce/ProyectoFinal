@@ -118,14 +118,20 @@ class Post extends Component{
                     <TouchableOpacity style={styles.closeButton} onPress={()=>this.hideModal()}>
                         <Text>X</Text>
                     </TouchableOpacity> 
-                    <Text>Comentarios:</Text>
+                    
 
-                    {/* Flatlist para mostrar los comentarios */}
+                    {this.props.postData.data.comments  === undefined ? 
+                    <Text>No comments yet! Make the first one </Text>:
+                    <View>
+                         <Text>Comentarios:</Text>
                     <FlatList
-                        data={this.props.postData.data.comments} //array de informacion que queremos mostrar
-                        keyextractor= {(comment)=>comment.createdAt.toString()} //paso la fecha de creacion a string
+                        data={this.props.postData.data.comments} 
+                        keyextractor= {(comment)=>comment.createdAt.toString()} 
                         renderItem={ ({item}) => <Text>{item.author}: {item.comment}</Text>}
                     />
+                    </View>
+                    }
+                    
 
 
                     {/* Formulario para nuevo comentarios */}
@@ -139,9 +145,14 @@ class Post extends Component{
                             value={this.state.comment}
                         />
                         {/* boton para que se guarde el comentario */}
-                        <TouchableOpacity style={styles.button} onPress={()=>{this.guardarComentario()}}>
+                        {this.state.comment ?
+                            <TouchableOpacity style={styles.button} onPress={()=>{this.guardarComentario()}}>
                             <Text style={styles.textButton}>Guadar comentario</Text>
-                        </TouchableOpacity>
+                            </TouchableOpacity> :
+                            <TouchableOpacity style={styles.button} disabled={true} >
+                            <Text style={styles.textButton}>I'm disabled</Text>
+                            </TouchableOpacity>
+                        }
                     </View>
 
                 </Modal>    :
