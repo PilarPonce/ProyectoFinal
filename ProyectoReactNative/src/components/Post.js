@@ -86,9 +86,16 @@ class Post extends Component{
         return(
             <View style={styles.contanier}>
              <Text>Texto del post: {this.props.postData.data.texto}</Text>
-             <Text>user: {this.props.postData.data.name} </Text>  
-             <Text>user email: {this.props.postData.data.owner} </Text>  
+             <Text>User: {this.props.postData.data.name} </Text>  
+             <Text>User email: {this.props.postData.data.owner} </Text>  
              <Text>Likes: {this.state.likes} </Text> 
+             {this.props.postData.data.comments  === undefined ? 
+                <Text>Comentarios: 0</Text>
+                    :
+                <Text>Comentarios: {this.props.postData.data.comments.length} </Text> 
+             }
+            
+
 
              {/* Cambio de botones me gusta/ me dejó de gustar */}
             {
