@@ -25,6 +25,18 @@ class Menu extends Component {
         }
     }
 
+    //para que se quede logueado
+    componentDidMount(){
+        auth.onAuthStateChanged(user => {
+            if(user){
+                this.setState({
+                    logueado:true,
+                    user: user,
+                })
+            }
+        })
+    }
+
     register(email, pass, userName) {
         auth.createUserWithEmailAndPassword(email, pass)
             .then(() => {
