@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer'; 
 import { auth } from '../firebase/config';
+import firebase from 'firebase';
+
 import Register from '../screens/register';
 import Login from '../screens/login';
 import Profile from '../screens/profile';
@@ -23,10 +25,11 @@ class Menu extends Component {
         }
     }
 
-    register(email, pass) {
+    register(email, pass, userName) {
         auth.createUserWithEmailAndPassword(email, pass)
             .then(() => {
                 console.log('registrado')
+                this.saveName(userName) //para que se guarde el nombre de usuario
                 this.setState({
                     errorRegister:''
                 })
@@ -37,6 +40,23 @@ class Menu extends Component {
                     errorRegister: error.message
                 })
             })
+    }
+
+    saveName(userName){
+        const user = firebase.auth().currentUser;
+        if (user != null) {
+            user.updateProfile({
+                displayName: userName,
+                //photoURL: photo,
+            })
+            .then(()=>{
+                console.log('username guardado')
+            })
+            .catch((error)=>{
+                console.log(error)
+            })
+            
+        }
     }
 
     login(email, pass){
@@ -77,7 +97,7 @@ class Menu extends Component {
             <NavigationContainer>
                 {this.state.logueado == false ?
                 <Drawer.Navigator>
-                    <Drawer.Screen name="Registro" component={() => <Register register={(email, pass) => this.register(email, pass)} errorRegister= {this.state.errorRegister} />} />
+                    <Drawer.Screen name="Registro" component={() => <Register register={(email, pass, userName) => this.register(email, pass, userName)} errorRegister= {this.state.errorRegister} />} />
                     <Drawer.Screen name ="Login" component={()=> <Login login={(email, pass)=> this.login(email, pass)} errorLogin={this.state.errorLogin}/>}/>
                 </Drawer.Navigator>:
                 <Drawer.Navigator>
