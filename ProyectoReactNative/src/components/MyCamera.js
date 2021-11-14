@@ -79,10 +79,10 @@ class MyCamera extends Component{
                                 />
                                 <View>
                                     <TouchableOpacity onPress={() => this.savePhoto()}>
-                                        <Text> Aceptar </Text>
+                                        <Text> Accept </Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity onPress={() => this.clear()}>
-                                        <Text> Rechazar </Text>
+                                        <Text> Decline </Text>
                                     </TouchableOpacity>
                                 </View>
 
@@ -95,10 +95,10 @@ class MyCamera extends Component{
                                     ref={reference => this.camera = reference}
                                 />
                                 <TouchableOpacity styles={styles.button} onPress={() => this.takePicture()}>
-                                    <Text>Tomar foto</Text>
+                                    <Text>Take Picture</Text>
                                 </TouchableOpacity>
                             </View> : 
-                        <Text> No tenes permisos para usar la cámara </Text>  // render mensaje 
+                        <Text> You don´t have permission to use the camera </Text>  // render mensaje 
                 }
             </View>
         )

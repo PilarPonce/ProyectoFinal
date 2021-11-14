@@ -13,7 +13,7 @@ class Profile extends Component{
       <View style={styles.container}>
           <Text style={styles.welcome}> Username: {this.props.userData.displayName}</Text>
           <Text style={styles.welcome}> Mail: {this.props.userData.email}</Text>
-          <Text style={styles.element}> Último login: {this.props.userData.metadata.lastSignInTime}</Text>
+          <Text style={styles.element}> Last login: {this.props.userData.metadata.lastSignInTime}</Text>
           <TouchableOpacity style={styles.touchable} onPress={()=>this.props.logout()}>
             <Text style={styles.touchableText}>Logout</Text>
     </TouchableOpacity>

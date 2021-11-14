@@ -91,14 +91,14 @@ class Post extends Component{
 
                 />
 
-             <Text>Texto del post: {this.props.postData.data.texto}</Text>
+             <Text>Post Text: {this.props.postData.data.texto}</Text>
              <Text>User: {this.props.postData.data.name} </Text>  
              <Text>User email: {this.props.postData.data.owner} </Text>  
              <Text>Likes: {this.state.likes} </Text> 
              {this.props.postData.data.comments  === undefined ? 
-                <Text>Comentarios: 0</Text>
+                <Text>Comments: 0</Text>
                     :
-                <Text>Comentarios: {this.props.postData.data.comments.length} </Text> 
+                <Text>Comments: {this.props.postData.data.comments.length} </Text> 
              }
             
 
@@ -107,15 +107,15 @@ class Post extends Component{
             {
                 this.state.myLike == false ?
                 <TouchableOpacity onPress={()=>this.darLike()}>
-                    <Text>Me gusta</Text>
+                    <Text>Like</Text>
                 </TouchableOpacity> :
                 <TouchableOpacity onPress={()=>this.quitarLike()}>
-                    <Text>Quitar like</Text>
+                    <Text>Dislike</Text>
                 </TouchableOpacity>                       
             }
             {/* Ver modal */}
             <TouchableOpacity onPress={()=>this.showModal()}>
-                <Text>Ver Comentarios</Text>
+                <Text>Show Comments</Text>
             </TouchableOpacity>
 
             {/* Modal para los comentarios 
@@ -136,7 +136,7 @@ class Post extends Component{
                     {this.props.postData.data.comments  === undefined ? 
                     <Text>No comments yet! Make the first one </Text>:
                     <View>
-                         <Text>Comentarios:</Text>
+                         <Text>Comments:</Text>
                     <FlatList
                         data={this.props.postData.data.comments} 
                         keyextractor= {(comment)=>comment.createdAt.toString()} 

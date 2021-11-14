@@ -57,7 +57,7 @@ class PostForm extends Component{
                         value={this.state.textoPost}    
                         />
                         <TouchableOpacity style={styles.button} onPress={()=>this.submitPost()}>
-                            <Text style={styles.textButton}>Guardar</Text>    
+                            <Text style={styles.textButton}>Save</Text>    
                         </TouchableOpacity>
                     
                     </View>
