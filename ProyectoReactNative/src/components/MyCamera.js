@@ -10,7 +10,7 @@ class MyCamera extends Component{
         this.state= {
             permission: false,
             photo: '',
-            showCamera: true, //lu lo tiene en false 
+            showCamera: true, 
         }
     }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, Modal, TextInput} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, Modal, TextInput, Image} from 'react-native';
 import { db, auth } from '../firebase/config';
 import firebase from 'firebase';
 import { FlatList } from 'react-native-gesture-handler';
@@ -85,6 +85,12 @@ class Post extends Component{
         console.log(this.props);
         return(
             <View style={styles.contanier}>
+                <Image
+                    style={styles.cameraBody}
+                    source={{ uri: this.props.postData.data.photo }} 
+
+                />
+
              <Text>Texto del post: {this.props.postData.data.texto}</Text>
              <Text>User: {this.props.postData.data.name} </Text>  
              <Text>User email: {this.props.postData.data.owner} </Text>  
@@ -165,8 +171,6 @@ class Post extends Component{
                 </Modal>    :
                 <Text></Text>
             } 
-
-
             </View>
         )
     }
@@ -175,6 +179,9 @@ class Post extends Component{
 
 
 const styles = StyleSheet.create({
+    cameraBody: {
+        flex: 7,
+    },
     contanier:{
         marginBottom: 20,
         borderRadius:4,
