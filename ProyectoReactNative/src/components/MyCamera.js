@@ -35,7 +35,32 @@ class MyCamera extends Component{
             .catch(error => console.log(error))
     }
 
+    savePhoto(){
+        fetch (this.state.photo)
+        .then (res => res.blob())
+        .then (
+            image => {
+                const ref = storage.ref(`photos/${Date.now()}.jpg`)
+                ref.put (image)
+                .then (()=> {
+                    ref.getDownloadURL()
+                    .then (url=> {
+                        this.props.onImageUpload(url);
+                        this.setState({
+                            photo: '',
+                        })
+                    })
+                })
+            })
+            .catch(error => console.log(error))
+    }
 
+    clear() {
+        this.setState({
+            photo: '',
+            showCamera: true
+        })
+    }
 
     render(){
         return(
@@ -46,7 +71,22 @@ class MyCamera extends Component{
 
                         this.state.showCamera === false ?
 
-                            <Text> ya sacaste la foto</Text> : 
+                            <React.Fragment>
+                                <Image
+                                    style={styles.cameraBody}
+                                    source={{ uri: this.state.photo }}
+
+                                />
+                                <View>
+                                    <TouchableOpacity onPress={() => this.savePhoto()}>
+                                        <Text> Aceptar </Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => this.clear()}>
+                                        <Text> Rechazar </Text>
+                                    </TouchableOpacity>
+                                </View>
+
+                            </React.Fragment> :
 
                             <View> 
                                 <Camera
