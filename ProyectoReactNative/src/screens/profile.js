@@ -7,13 +7,13 @@ class Profile extends Component{
   constructor(props){
     super(props);
     this.state ={
-      posteos: []
+      posteos: [],
       
     }
   }
 
   componentDidMount(){
-    db.collection('posts').where('owner', '==', auth.currentUser.email).onSnapshot(
+    db.collection('posts').where('owner', '==', auth.currentUser.email).orderBy('createdAt', 'desc').onSnapshot(
       docs => {
         console.log(docs);
         let posts = [];
@@ -38,6 +38,7 @@ class Profile extends Component{
           <Text style={styles.welcome}> Username: {this.props.userData.displayName}</Text>
           <Text style={styles.welcome}> Mail: {this.props.userData.email}</Text>
           <Text style={styles.element}> Last login: {this.props.userData.metadata.lastSignInTime}</Text>
+          <Text style={styles.element}> User Posts: {this.state.posteos.length} </Text>
           <View style={styles.containerPost}>
           <FlatList 
             data= { this.state.posteos }
