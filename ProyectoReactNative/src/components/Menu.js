@@ -10,6 +10,7 @@ import Login from '../screens/login';
 import Profile from '../screens/profile';
 import Home from '../screens/home';
 import PostForm from '../screens/postsForm';
+import Search from '../screens/search';
 
 
 
@@ -118,6 +119,7 @@ class Menu extends Component {
                     <Drawer.Screen name="Home" component={()=><Home />} />
                     <Drawer.Screen name ="New Post" component={(drawerProps)=> <PostForm drawerProps={drawerProps}/>}/>
                     <Drawer.Screen name="Profile" component={()=><Profile userData={this.state.user} logout={()=>this.logout() } />} />
+                    <Drawer.Screen name="Search" component={()=><Search />} />
                 </Drawer.Navigator>}
             </NavigationContainer>
         )

@@ -32,7 +32,10 @@ class Profile extends Component{
     )
   }
 
+
+
   render(){
+    console.log(this.state.posteos);
     return(
       <View style={styles.container}>
           <Text style={styles.welcome}> Username: {this.props.userData.displayName}</Text>
@@ -40,11 +43,13 @@ class Profile extends Component{
           <Text style={styles.element}> Last login: {this.props.userData.metadata.lastSignInTime}</Text>
           <Text style={styles.element}> User Posts: {this.state.posteos.length} </Text>
           <View style={styles.containerPost}>
+          
           <FlatList 
             data= { this.state.posteos }
             keyExtractor = { post => post.id}
             renderItem = { ({item}) => <Post postData={item} />} 
           />
+          
           </View>
           <TouchableOpacity style={styles.touchable} onPress={()=>this.props.logout()}>
             <Text style={styles.touchableText}>Logout</Text>

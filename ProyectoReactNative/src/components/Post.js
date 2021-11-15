@@ -81,6 +81,14 @@ class Post extends Component{
          })
     }
 
+    deletePost(){
+        db.collection('posts').doc(this.props.postData.id).delete()
+        .then((res)=>{
+            console.log('post borrado', res);
+        })
+        .catch((error)=> console.log(error))
+    }
+
     render(){
         console.log(this.props);
         return(
@@ -101,7 +109,14 @@ class Post extends Component{
                 <Text>Comments: {this.props.postData.data.comments.length} </Text> 
              }
             
-
+             {this.props.postData.data.owner == auth.currentUser.email ?
+                <TouchableOpacity onPress={()=>this.deletePost()}>
+                <Text>Delete post</Text>
+                </TouchableOpacity> :
+                <Text></Text>
+            
+            
+            }
 
              {/* Cambio de botones me gusta/ me dejó de gustar */}
             {
