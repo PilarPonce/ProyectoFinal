@@ -14,7 +14,8 @@ class Post extends Component{
            comment: '',
         }
     }
-    
+
+//COMPONENT DID MOUNT
     componentDidMount(){
         if(this.props.postData.data.likes){ 
             this.setState({
@@ -25,6 +26,7 @@ class Post extends Component{
         
     }
 
+//LIKE
     darLike(){
         db.collection('posts').doc(this.props.postData.id).update({
             likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
@@ -38,6 +40,7 @@ class Post extends Component{
 
     }
 
+//DISLIKE
     quitarLike(){
         db.collection('posts').doc(this.props.postData.id).update({
             likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
@@ -51,6 +54,7 @@ class Post extends Component{
 
     }
 
+//COMENTARIOS:
     showModal(){
         this.setState({
             showModal:true,
@@ -81,6 +85,7 @@ class Post extends Component{
          })
     }
 
+//DELETE POST
     deletePost(){
         db.collection('posts').doc(this.props.postData.id).delete()
         .then((res)=>{
@@ -89,53 +94,72 @@ class Post extends Component{
         .catch((error)=> console.log(error))
     }
 
+
+//RENDER 
     render(){
         console.log(this.props);
         return(
             <View style={styles.contanier}>
-                <Image
-                    style={styles.cameraBody}
+              
+                <Text style={styles.infoUser}> @{this.props.postData.data.name} </Text>  
+            {/* IMAGEN */}
+                <Image 
+                    style={
+                        {
+                            height: 370,
+                            width: 550, 
+                            alignSelf: 'center',
+                            marginBottom: 20,
+                        }
+                    }
                     source={{ uri: this.props.postData.data.photo }} 
 
                 />
-
-             <Text>Post Text: {this.props.postData.data.texto}</Text>
-             <Text>User: {this.props.postData.data.name} </Text>  
-             <Text>User email: {this.props.postData.data.owner} </Text>  
-             <Text>Likes: {this.state.likes} </Text> 
-             {this.props.postData.data.comments  === undefined ? 
-                <Text>Comments: 0</Text>
-                    :
-                <Text>Comments: {this.props.postData.data.comments.length} </Text> 
-             }
             
-             {this.props.postData.data.owner == auth.currentUser.email ?
-                <TouchableOpacity onPress={()=>this.deletePost()}>
-                <Text>Delete post</Text>
-                </TouchableOpacity> :
-                <Text></Text>
-            
-            
-            }
+            {/* INFO POSTEO */}
+                <View style={styles.infoContainer}>
 
-             {/* Cambio de botones me gusta/ me dejó de gustar */}
-            {
-                this.state.myLike == false ?
-                <TouchableOpacity onPress={()=>this.darLike()}>
-                    <Text>Like</Text>
-                </TouchableOpacity> :
-                <TouchableOpacity onPress={()=>this.quitarLike()}>
-                    <Text>Dislike</Text>
-                </TouchableOpacity>                       
-            }
-            {/* Ver modal */}
-            <TouchableOpacity onPress={()=>this.showModal()}>
-                <Text>Show Comments</Text>
-            </TouchableOpacity>
+                    {/* LIKES */}
+                    <View style= {styles.likes}>
+                        <Text style={styles.infoPostLike}> {this.state.likes} CORAZON  </Text>
+                        {
+                            this.state.myLike == false ?
+                                <TouchableOpacity onPress={() => this.darLike()}>
+                                    <Text>Like</Text>
+                                </TouchableOpacity> :
+                                <TouchableOpacity onPress={() => this.quitarLike()}>
+                                    <Text>Dislike</Text>
+                                </TouchableOpacity>
+                        }
+                        {/* poner el like/dislike al lado del corazon con flex direction column  */}
+                    </View>
 
-            {/* Modal para los comentarios 
-            Lo pongo en un if ternario que se fija el valor de showModal del estado
-            */}
+                    {/* DESCRIPCION */}
+                    <Text style={styles.infoPost}> @{this.props.postData.data.name}: {this.props.postData.data.texto}</Text>
+                        
+                    {/* COMENTARIOS */}
+                    <View>
+                       
+                        {this.props.postData.data.comments === undefined ?
+                            <Text style={styles.infoPost}> 0 comments</Text>
+                            :
+                            <Text style={styles.infoPost}>Comments: {this.props.postData.data.comments.length} </Text>
+                        }
+
+                        <TouchableOpacity onPress={() => this.showModal()}>
+                            <Text>Show Comments</Text>
+                        </TouchableOpacity>
+
+                    </View>
+                </View>
+
+            
+            {/* Modal para los comentarios */}
+            <View>
+
+            </View>
+            
+          
             {   this.state.showModal ?
                 <Modal
                     style= {styles.modalContainer}
@@ -143,9 +167,9 @@ class Post extends Component{
                     animationType='slide'
                     transparent={false}
                 >   
-                    <TouchableOpacity style={styles.closeButton} onPress={()=>this.hideModal()}>
+                    <TouchableOpacity style={styles.closeButton} onPress={() => this.hideModal()}>
                         <Text>X</Text>
-                    </TouchableOpacity> 
+                    </TouchableOpacity>
                     
 
                     {this.props.postData.data.comments  === undefined ? 
@@ -161,7 +185,6 @@ class Post extends Component{
                     }
                     
 
-
                     {/* Formulario para nuevo comentarios */}
                     <View>
                         <TextInput 
@@ -175,7 +198,7 @@ class Post extends Component{
                         {/* boton para que se guarde el comentario */}
                         {this.state.comment ?
                             <TouchableOpacity style={styles.button} onPress={()=>{this.guardarComentario()}}>
-                            <Text style={styles.textButton}>Guadar comentario</Text>
+                            <Text style={styles.textButton}>Save comment</Text>
                             </TouchableOpacity> :
                             <TouchableOpacity style={styles.button} disabled={true} >
                             <Text style={styles.textButton}>I'm disabled</Text>
@@ -184,9 +207,19 @@ class Post extends Component{
                     </View>
 
                 </Modal>    :
+
                 <Text></Text>
             } 
-            </View>
+                {/* DELETE POST */}
+                {
+                    this.props.postData.data.owner == auth.currentUser.email ?
+                        <TouchableOpacity onPress={() => this.deletePost()} style={styles.botonDeletePost}>
+                            <Text style={styles.infoPost}>Delete post</Text>
+                        </TouchableOpacity> :
+                        <Text></Text>
+                }
+               
+                </View>
         )
     }
 
@@ -194,26 +227,59 @@ class Post extends Component{
 
 
 const styles = StyleSheet.create({
-    cameraBody: {
-        flex: 7,
-        width: '100%',
-        height: '95%'
-    },
-    contanier:{
+    infoUser: { 
+        color: 'pink',
         marginBottom: 20,
-        borderRadius:4,
+        fontSize: 20,
+
+    },
+    contanier: {
+        marginBottom: 20,
+        borderRadius: 4,
         borderColor: "#ccc",
         borderWidth: 1,
         padding: 10,
         width: '100%',
-        height: 1000 ,
+        height: 600,
+        backgroundColor: 'blue'
+    },
+    likes: {
+        display: 'flex',
+        flexDirection: 'column',
+
+    },
+  
+    infoContainer: {
+        backgroundColor: 'white',
+        
+    }, 
+    infoPostLike: {
+        fontSize: 16,
+        color: 'pink',
+    },
+    infoPost: {
+        color: 'pink',
+        fontSize: 13, 
+        marginBottom: 10, 
+    }, 
+    botonDeletePost: {
+        backgroundColor: 'red',
+        width: 120,
+        height: 30, 
+        padding: 5,
+        borderRadius: 4,
+        textAlign: 'center',
+        borderRadius: 4,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: 'black'
     },
     modalContainer:{
         width: '97%',
         borderRadius:4,
         padding:5,
         alignSelf: 'center',
-        boxShadow: 'rgb(204 204 204) 0px 0px 9px 7px', //no funciona en movile
+        boxShadow: 'rgb(204 204 204) 0px 0px 9px 7px', //no funciona en mobile
         marginTop: 20,
         marginBottom: 10 
     },
