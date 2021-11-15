@@ -181,6 +181,8 @@ class Post extends Component{
 const styles = StyleSheet.create({
     cameraBody: {
         flex: 7,
+        width: '100%',
+        height: '95%'
     },
     contanier:{
         marginBottom: 20,
@@ -188,6 +190,8 @@ const styles = StyleSheet.create({
         borderColor: "#ccc",
         borderWidth: 1,
         padding: 10,
+        width: '100%',
+        height: 1000 ,
     },
     modalContainer:{
         width: '97%',

@@ -88,7 +88,7 @@ class MyCamera extends Component{
 
                             </React.Fragment> :
 
-                            <View> 
+                            <View style= {styles.container}> 
                                 <Camera
                                     style={styles.cameraBody}
                                     type={Camera.Constants.Type.back}
@@ -108,6 +108,9 @@ class MyCamera extends Component{
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        width: '100%',
+        height: '95%'
+
     },
     cameraBody: {
         flex: 7,

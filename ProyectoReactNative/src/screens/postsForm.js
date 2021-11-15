@@ -72,6 +72,8 @@ const styles = StyleSheet.create({
     formContainer:{
         paddingHorizontal:10,
         marginTop: 20,
+        width: '100%',
+        height: '95%'
     },
     input:{
         height:100,
