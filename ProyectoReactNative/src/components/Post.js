@@ -99,9 +99,21 @@ class Post extends Component{
     render(){
         console.log(this.props);
         return(
+        
+            <View style={styles.body}> 
             <View style={styles.contanier}>
               
                 <Text style={styles.infoUser}> @{this.props.postData.data.name} </Text>  
+                
+                {/* DELETE POST */}
+                    {
+                        this.props.postData.data.owner == auth.currentUser.email ?
+                            <TouchableOpacity onPress={() => this.deletePost()} style={styles.botonDeletePost}>
+                                <Text style={styles.infoPost}>Delete post</Text>
+                            </TouchableOpacity> :
+                            <Text></Text>
+                    }
+
             {/* IMAGEN */}
                 <Image 
                     style={
@@ -121,7 +133,7 @@ class Post extends Component{
 
                     {/* LIKES */}
                     <View style= {styles.likes}>
-                        <Text style={styles.infoPostLike}> {this.state.likes} CORAZON  </Text>
+                        <Text style={styles.infoPostLike}> {this.state.likes} like  </Text>
                         {
                             this.state.myLike == false ?
                                 <TouchableOpacity onPress={() => this.darLike()}>
@@ -147,19 +159,13 @@ class Post extends Component{
                         }
 
                         <TouchableOpacity onPress={() => this.showModal()}>
-                            <Text>Show Comments</Text>
+                                <Text style={styles.infoPost} >Show Comments</Text>
                         </TouchableOpacity>
 
                     </View>
                 </View>
-
-            
-            {/* Modal para los comentarios */}
-            <View>
-
-            </View>
-            
-          
+    
+            {/* MODAL PARA COMENTARIOS */}
             {   this.state.showModal ?
                 <Modal
                     style= {styles.modalContainer}
@@ -189,7 +195,7 @@ class Post extends Component{
                     <View>
                         <TextInput 
                             style={styles.input}
-                            placeholder="Comentar..."
+                            placeholder="Comment..."
                             keyboardType="default"
                             multiline
                             onChangeText={text => this.setState({comment: text})}
@@ -210,16 +216,9 @@ class Post extends Component{
 
                 <Text></Text>
             } 
-                {/* DELETE POST */}
-                {
-                    this.props.postData.data.owner == auth.currentUser.email ?
-                        <TouchableOpacity onPress={() => this.deletePost()} style={styles.botonDeletePost}>
-                            <Text style={styles.infoPost}>Delete post</Text>
-                        </TouchableOpacity> :
-                        <Text></Text>
-                }
-               
+                
                 </View>
+            </View>
         )
     }
 
@@ -227,12 +226,17 @@ class Post extends Component{
 
 
 const styles = StyleSheet.create({
+    body: {
+        backgroundColor: 'white',
+    }, 
+
     infoUser: { 
-        color: 'pink',
+        color: 'black',
         marginBottom: 20,
         fontSize: 20,
 
     },
+
     contanier: {
         marginBottom: 20,
         borderRadius: 4,
@@ -241,8 +245,9 @@ const styles = StyleSheet.create({
         padding: 10,
         width: '100%',
         height: 600,
-        backgroundColor: 'blue'
+        backgroundColor: 'FF5C8A'
     },
+
     likes: {
         display: 'flex',
         flexDirection: 'column',
@@ -253,26 +258,29 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         
     }, 
+
     infoPostLike: {
         fontSize: 16,
-        color: 'pink',
+        color: 'black',
     },
+
     infoPost: {
-        color: 'pink',
+        color: 'black',
         fontSize: 13, 
         marginBottom: 10, 
     }, 
+
     botonDeletePost: {
-        backgroundColor: 'red',
-        width: 120,
-        height: 30, 
-        padding: 5,
-        borderRadius: 4,
+        width: 100,
+        height: 30,
+        backgroundColor: '#FAE0E4',
         textAlign: 'center',
+        padding: 5,
         borderRadius: 4,
         borderWidth: 1,
         borderStyle: 'solid',
-        borderColor: 'black'
+        borderColor: 'black',
+        marginBottom: 5,
     },
     modalContainer:{
         width: '97%',
