@@ -54,7 +54,7 @@ class Profile extends Component{
           {/* podemos hacer como en el modal de comentarios y ponemos user information y que se abra y ahi adentro ponemos el email...  */}
          
         <TouchableOpacity onPress={() => this.showModal()}>
-          <Text > User Information</Text>
+          <Text style={styles.userInformation} >User Information</Text>
         </TouchableOpacity>
 
           <Modal
@@ -75,7 +75,7 @@ class Profile extends Component{
 
           </Modal> 
   
-          
+          <Text style={styles.tituloPosts}>All your posts:</Text>
           {/* POSTS DEL USUARIO */}
           <View style={styles.containerPost}>
           
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
         marginHorizontal:10
     },
     user:{
-        fontSize:18,
+        fontSize:20,
         marginTop:20,
         marginBottom:30,
         fontWeight: 'bold'
@@ -111,27 +111,43 @@ const styles = StyleSheet.create({
     },
     touchable:{
         padding: 10,
-        backgroundColor: '#FAE0E4',
+        backgroundColor: '#FF7096',
         marginTop: 30,
         borderRadius: 4,
+        width: '60%',
+        display: 'flex',
+        alignSelf: 'center'
     },
-  botonLogout:{
-        fontWeight: 'bold',
-        color:'black',
-        textAlign: 'center'
+    tituloPosts:{
+      fontSize: 15,
+      fontWeight: 'bold',
+      marginLeft: 10,
+      marginBottom: 10
     },
-  containerPost:{
-      paddingHorizontal:10,
-    }, 
-  closeButton: {
-    color: '#fff',
-    padding: 5,
-    backgroundColor: '#dc3545',
-    alignSelf: 'flex-end',
-    borderRadius: 4,
-    paddingHorizontal: 8,
-  },
-    
+    userInformation:{
+      fontSize: 15,
+      fontWeight: 'bold',
+      marginHorizontal: 10,
+      marginBottom: 10,
+      textDecorationLine: 'underline',
+    },
+    botonLogout:{
+          fontWeight: 'bold',
+          color:'black',
+          textAlign: 'center'
+      },
+    containerPost:{
+        paddingHorizontal:10,
+      }, 
+    closeButton: {
+      color: '#fff',
+      padding: 5,
+      backgroundColor: '#dc3545',
+      alignSelf: 'flex-end',
+      borderRadius: 4,
+      paddingHorizontal: 8,
+    },
+      
 });
 
 export default Profile;

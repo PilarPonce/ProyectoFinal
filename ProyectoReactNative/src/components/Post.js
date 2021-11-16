@@ -99,22 +99,22 @@ class Post extends Component{
     render(){
         console.log(this.props);
         return(
-        
-            <View style={styles.body}> 
+        <View style={styles.body}> 
+            
             <View style={styles.contanier}>
+
+                {/* DELETE POST */}
+                {
+                    this.props.postData.data.owner == auth.currentUser.email ?
+                        <TouchableOpacity onPress={() => this.deletePost()} style={styles.botonDeletePost}>
+                            <Text style={styles.textBoton}>Delete post</Text>
+                        </TouchableOpacity> :
+                        <Text></Text>
+                }
               
                 <Text style={styles.infoUser}> @{this.props.postData.data.name} </Text>  
                 
-                {/* DELETE POST */}
-                    {
-                        this.props.postData.data.owner == auth.currentUser.email ?
-                            <TouchableOpacity onPress={() => this.deletePost()} style={styles.botonDeletePost}>
-                                <Text style={styles.infoPost}>Delete post</Text>
-                            </TouchableOpacity> :
-                            <Text></Text>
-                    }
-
-            {/* IMAGEN */}
+                {/* IMAGEN */}
                 <Image 
                     style={
                         {
@@ -128,7 +128,7 @@ class Post extends Component{
 
                 />
             
-            {/* INFO POSTEO */}
+                {/* INFO POSTEO */}
                 <View style={styles.infoContainer}>
 
                     {/* LIKES */}
@@ -165,63 +165,59 @@ class Post extends Component{
                     </View>
                 </View>
     
-            {/* MODAL PARA COMENTARIOS */}
-            {   this.state.showModal ?
-                <Modal
-                    style= {styles.modalContainer}
-                    visible={this.state.showModal}
-                    animationType='slide'
-                    transparent={false}
-                >   
-                    <TouchableOpacity style={styles.closeButton} onPress={() => this.hideModal()}>
-                        <Text>X</Text>
-                    </TouchableOpacity>
-                    
+                {/* MODAL PARA COMENTARIOS */}
+                {   this.state.showModal ?
+                    <Modal
+                        style= {styles.modalContainer}
+                        visible={this.state.showModal}
+                        animationType='slide'
+                        transparent={false}
+                    >   
+                        <TouchableOpacity style={styles.closeButton} onPress={() => this.hideModal()}>
+                            <Text>X</Text>
+                        </TouchableOpacity>
 
-                    {this.props.postData.data.comments  === undefined ? 
-                    <Text>No comments yet! Make the first one </Text>:
-                    <View>
-                         <Text>Comments:</Text>
-                    <FlatList
-                        data={this.props.postData.data.comments} 
-                        keyextractor= {(comment)=>comment.createdAt.toString()} 
-                        renderItem={ ({item}) => <Text>{item.author}: {item.comment}</Text>}
-                    />
-                    </View>
-                    }
-                    
-
-                    {/* Formulario para nuevo comentarios */}
-                    <View>
-                        <TextInput 
-                            style={styles.input}
-                            placeholder="Comment..."
-                            keyboardType="default"
-                            multiline
-                            onChangeText={text => this.setState({comment: text})}
-                            value={this.state.comment}
-                        />
-                        {/* boton para que se guarde el comentario */}
-                        {this.state.comment ?
-                            <TouchableOpacity style={styles.button} onPress={()=>{this.guardarComentario()}}>
-                            <Text style={styles.textButton}>Save comment</Text>
-                            </TouchableOpacity> :
-                            <TouchableOpacity style={styles.button} disabled={true} >
-                            <Text style={styles.textButton}>I'm disabled</Text>
-                            </TouchableOpacity>
+                        {this.props.postData.data.comments  === undefined ? 
+                            <Text>No comments yet! Make the first one </Text>:
+                            <View>
+                                <Text>Comments:</Text>
+                            <FlatList
+                                data={this.props.postData.data.comments} 
+                                keyextractor= {(comment)=>comment.createdAt.toString()} 
+                                renderItem={ ({item}) => <Text>{item.author}: {item.comment}</Text>}
+                            />
+                            </View>
                         }
-                    </View>
 
-                </Modal>    :
+                        {/* Formulario para nuevo comentarios */}
+                        <View>
+                            <TextInput 
+                                style={styles.input}
+                                placeholder="Comment..."
+                                keyboardType="default"
+                                multiline
+                                onChangeText={text => this.setState({comment: text})}
+                                value={this.state.comment}
+                            />
+                            {/* boton para que se guarde el comentario */}
+                            {this.state.comment ?
+                                <TouchableOpacity style={styles.button} onPress={()=>{this.guardarComentario()}}>
+                                <Text style={styles.textButton}>Save comment</Text>
+                                </TouchableOpacity> :
+                                <TouchableOpacity style={styles.button} disabled={true} >
+                                <Text style={styles.textButton}>I'm disabled</Text>
+                                </TouchableOpacity>
+                            }
+                        </View>
 
-                <Text></Text>
-            } 
+                    </Modal>    :
+                    <Text></Text>
+                } 
                 
                 </View>
-            </View>
+        </View>
         )
     }
-
 }
 
 
@@ -273,7 +269,7 @@ const styles = StyleSheet.create({
     botonDeletePost: {
         width: 100,
         height: 30,
-        backgroundColor: '#FAE0E4',
+        backgroundColor: '#FF477E',
         textAlign: 'center',
         padding: 5,
         borderRadius: 4,
@@ -281,6 +277,12 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderColor: 'black',
         marginBottom: 5,
+        display: 'flex',
+        alignSelf: 'flex-end'
+    },
+
+    textBoton:{
+        fontWeight: 'bold',
     },
     modalContainer:{
         width: '97%',

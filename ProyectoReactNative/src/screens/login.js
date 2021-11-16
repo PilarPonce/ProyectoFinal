@@ -14,7 +14,6 @@ class Login extends Component{
         console.log(this.props.login);
         return(
             <View style={styles.formContainer}>
-                <Text>Login</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({email: text})}
@@ -30,14 +29,14 @@ class Login extends Component{
 
                 {this.state.email && this.state.password ?
                 <TouchableOpacity style={styles.button} onPress={()=>this.props.login(this.state.email, this.state.password)}>
-                    <Text style={styles.textButton}>Ingresar</Text>    
+                    <Text style={styles.textButton}>Log in</Text>    
                 </TouchableOpacity>:
-                <TouchableOpacity style={styles.button} disabled={true} >
-                <Text style={styles.textButton}>I'm disabled</Text>
+                <TouchableOpacity style={styles.buttonDisabled} disabled={true} >
+                <Text>I'm disabled</Text>
                 </TouchableOpacity>
                 }
 
-                <Text> {this.props.errorLogin} </Text>
+                <Text style={styles.mensajeError}> {this.props.errorLogin} </Text>
             </View>
         )
     }
@@ -58,18 +57,33 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         marginVertical:10,
     },
-    button:{
-        backgroundColor:'#28a745',
+    button: {
+        backgroundColor: '#FF7096',
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: 'center',
-        borderRadius:4, 
-        borderWidth:1,
+        borderRadius: 4,
+        borderWidth: 1,
         borderStyle: 'solid',
-        borderColor: '#28a745'
+        borderColor: '#FF7096'
+    },
+    buttonDisabled: {
+        backgroundColor: '#FBB1BD',
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: 'center',
+        borderRadius: 4,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: '#FBB1BD'
     },
     textButton:{
         color: '#fff'
+    },
+    mensajeError:{
+        color: 'red',
+        marginTop: 10,
+        textAlign: 'center'
     }
 
 })

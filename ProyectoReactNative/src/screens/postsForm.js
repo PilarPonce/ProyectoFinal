@@ -51,13 +51,13 @@ class PostForm extends Component{
                         <TextInput
                         style={styles.input}
                         onChangeText={(text)=>this.setState({textoPost: text})}
-                        placeholder='Escribí aquí'
+                        placeholder='Type here...'
                         keyboardType='default'
                         multiline
                         value={this.state.textoPost}    
                         />
                         <TouchableOpacity style={styles.button} onPress={()=>this.submitPost()}>
-                            <Text style={styles.textButton}>Save</Text>    
+                            <Text>Save Post</Text>    
                         </TouchableOpacity>
                     
                     </View>
@@ -86,14 +86,14 @@ const styles = StyleSheet.create({
         marginVertical:10,
     },
     button:{
-        backgroundColor:'#28a745',
+        backgroundColor:'#FF99AC',
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: 'center',
         borderRadius:4, 
         borderWidth:1,
         borderStyle: 'solid',
-        borderColor: '#28a745'
+        borderColor: '#FF99AC'
     },
     textButton:{
         color: '#fff'

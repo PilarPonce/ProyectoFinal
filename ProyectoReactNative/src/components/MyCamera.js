@@ -14,7 +14,7 @@ class MyCamera extends Component{
         }
     }
 
-    //COMPONENT DID MOUNT
+    //component did mount
     componentDidMount() {
         Camera.requestCameraPermissionsAsync()
             .then(() => {
@@ -25,7 +25,7 @@ class MyCamera extends Component{
             .catch(error => console.log(error))
     }
 
-    // TAKE PICTURE
+    //take picture
     takePicture (){
         this.camera.takePictureAsync()
             .then((photo) => {
@@ -37,7 +37,7 @@ class MyCamera extends Component{
             .catch(error => console.log(error))
     }
 
-    // SAVE PHOTO
+    //save photo
     savePhoto(){
         fetch (this.state.photo)
         .then (res => res.blob())
@@ -58,7 +58,7 @@ class MyCamera extends Component{
             .catch(error => console.log(error))
     }
 
-    // CLEAR
+    //vacio el estado
     clear() {
         this.setState({
             photo: '',
@@ -66,7 +66,7 @@ class MyCamera extends Component{
         })
     }
 
-    // RENDER 
+    //render
     render(){
         return(
             <View style= {styles.container}>
@@ -77,19 +77,17 @@ class MyCamera extends Component{
                         this.state.showCamera === false ?
 
                             <React.Fragment>
-                                {/* IMAGE */}
                                 <Image
                                     style={styles.cameraBody}
                                     source={{ uri: this.state.photo }}
 
                                 />
-                                {/* ACCEPT/ DECLINE PHOTO  */}
                                 <View>
-                                    <TouchableOpacity onPress={() => this.savePhoto()} style={styles.acceptDecline}>
-                                        <Text> Accept </Text>
+                                    <TouchableOpacity  style={styles.botonAccept} onPress={() => this.savePhoto()}>
+                                        <Text  style={styles.botonText}> Accept </Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity onPress={() => this.clear()} style={styles.acceptDecline}>
-                                        <Text> Decline </Text>
+                                    <TouchableOpacity  style={styles.botonDecline} onPress={() => this.clear()}>
+                                        <Text  style={styles.botonText}> Decline </Text>
                                     </TouchableOpacity>
                                 </View>
 
@@ -101,12 +99,11 @@ class MyCamera extends Component{
                                     type={Camera.Constants.Type.back}
                                     ref={reference => this.camera = reference}
                                 />
-                                {/* TAKE PICTURE */}
-                                <TouchableOpacity styles={styles.button} onPress={() => this.takePicture()} style={styles.takePicture}>
-                                    <Text>TAKE PICTURE</Text>
+                                <TouchableOpacity style={styles.boton} onPress={() => this.takePicture()}>
+                                    <Text style={styles.botonText}>Take Picture</Text>
                                 </TouchableOpacity>
                             </View> : 
-                        <Text> You don´t have permission to use the camera </Text>  // render mensaje 
+                        <Text style= {styles.message}> You don´t have permission to use the camera </Text>  // render mensaje 
                 }
             </View>
         )
@@ -121,37 +118,62 @@ const styles = StyleSheet.create({
 
     },
     cameraBody: {
-        flex: 7,
+        flex: 6,
     },
     button: {
         flex: 1,
         justifyContent: 'center',
-    }, 
-    acceptDecline: {
-        width: 100,
-        height: 30,
-        backgroundColor: '#FAE0E4',
+        backgroundColor: 'red'
+    },
+    boton:{
+        display: 'flex',
+        alignSelf: 'center',
+        backgroundColor: '#F7CAD0',
+        paddingHorizontal: 10,
+        paddingVertical: 6,
         textAlign: 'center',
-        padding: 5,
         borderRadius: 4,
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: 'black',
-        marginTop: 15,
+        marginTop: 10
     },
-    takePicture: {
-        marginTop: 20, 
-        width: 100,
-        height: 50,
-        backgroundColor: '#FAE0E4',
+    botonAccept:{
+        display: 'flex',
+        alignSelf: 'center',
+        backgroundColor: '#FF99AC',
+        paddingHorizontal: 10,
+        paddingVertical: 6,
         textAlign: 'center',
-        padding: 5,
         borderRadius: 4,
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: 'black',
-        marginBottom: 5,
+        marginTop: 10
     },
+    botonDecline:{
+        display: 'flex',
+        alignSelf: 'center',
+        backgroundColor: '#FF5C8A',
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: 'center',
+        borderRadius: 4,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: 'black',
+        marginTop: 10
+    },
+    botonText:{
+        fontWeight: 'bold'
+    },
+    message:{
+        color: 'red',
+        fontWeight: 'bold',
+        fontSize: 20,
+        display: 'flex',
+        alignSelf: 'center'
+    }
 
 
 })

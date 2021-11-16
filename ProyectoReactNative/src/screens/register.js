@@ -14,7 +14,6 @@ class Register extends Component {
     render() {
         return (
             <View style={styles.registerContainer}>
-                <Text>Register</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={(text) => this.setState({ email: text })}
@@ -37,12 +36,12 @@ class Register extends Component {
                 <TouchableOpacity style={styles.button} onPress={() => this.props.register(this.state.email, this.state.password, this.state.userName)} >
                     <Text style={styles.textButton}>Register</Text>
                 </TouchableOpacity> : 
-                <TouchableOpacity style={styles.button} disabled={true} >
-                <Text style={styles.textButton}>I'm disabled</Text>
+                <TouchableOpacity style={styles.buttonDisabled} disabled={true} >
+                <Text>I'm disabled</Text>
                 </TouchableOpacity>
                 }
 
-                <Text> {this.props.errorRegister} </Text>
+                <Text style={styles.mensajeError}> {this.props.errorRegister} </Text>
             </View>
         )
     }
@@ -64,17 +63,32 @@ const styles = StyleSheet.create({
         marginVertical: 10,
     },
     button: {
-        backgroundColor: '#28a745',
+        backgroundColor: '#FF7096',
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: 'center',
         borderRadius: 4,
         borderWidth: 1,
         borderStyle: 'solid',
-        borderColor: '#28a745'
+        borderColor: '#FF7096'
+    },
+    buttonDisabled: {
+        backgroundColor: '#FBB1BD',
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: 'center',
+        borderRadius: 4,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: '#FBB1BD'
     },
     textButton: {
         color: '#fff'
+    },
+    mensajeError:{
+        color: 'red',
+        marginTop: 10,
+        textAlign: 'center'
     }
 
 })
