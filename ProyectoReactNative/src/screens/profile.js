@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
         color:'black',
         textAlign: 'center'
     },
-    containerPost:{
+  containerPost:{
       paddingHorizontal:10,
     }, 
   closeButton: {

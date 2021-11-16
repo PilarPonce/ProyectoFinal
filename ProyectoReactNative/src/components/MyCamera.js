@@ -14,6 +14,7 @@ class MyCamera extends Component{
         }
     }
 
+    //COMPONENT DID MOUNT
     componentDidMount() {
         Camera.requestCameraPermissionsAsync()
             .then(() => {
@@ -24,6 +25,7 @@ class MyCamera extends Component{
             .catch(error => console.log(error))
     }
 
+    // TAKE PICTURE
     takePicture (){
         this.camera.takePictureAsync()
             .then((photo) => {
@@ -35,6 +37,7 @@ class MyCamera extends Component{
             .catch(error => console.log(error))
     }
 
+    // SAVE PHOTO
     savePhoto(){
         fetch (this.state.photo)
         .then (res => res.blob())
@@ -55,6 +58,7 @@ class MyCamera extends Component{
             .catch(error => console.log(error))
     }
 
+    // CLEAR
     clear() {
         this.setState({
             photo: '',
@@ -62,6 +66,7 @@ class MyCamera extends Component{
         })
     }
 
+    // RENDER 
     render(){
         return(
             <View style= {styles.container}>
@@ -72,16 +77,18 @@ class MyCamera extends Component{
                         this.state.showCamera === false ?
 
                             <React.Fragment>
+                                {/* IMAGE */}
                                 <Image
                                     style={styles.cameraBody}
                                     source={{ uri: this.state.photo }}
 
                                 />
+                                {/* ACCEPT/ DECLINE PHOTO  */}
                                 <View>
-                                    <TouchableOpacity onPress={() => this.savePhoto()}>
+                                    <TouchableOpacity onPress={() => this.savePhoto()} style={styles.acceptDecline}>
                                         <Text> Accept </Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity onPress={() => this.clear()}>
+                                    <TouchableOpacity onPress={() => this.clear()} style={styles.acceptDecline}>
                                         <Text> Decline </Text>
                                     </TouchableOpacity>
                                 </View>
@@ -94,8 +101,9 @@ class MyCamera extends Component{
                                     type={Camera.Constants.Type.back}
                                     ref={reference => this.camera = reference}
                                 />
-                                <TouchableOpacity styles={styles.button} onPress={() => this.takePicture()}>
-                                    <Text>Take Picture</Text>
+                                {/* TAKE PICTURE */}
+                                <TouchableOpacity styles={styles.button} onPress={() => this.takePicture()} style={styles.takePicture}>
+                                    <Text>TAKE PICTURE</Text>
                                 </TouchableOpacity>
                             </View> : 
                         <Text> You don´t have permission to use the camera </Text>  // render mensaje 
@@ -118,7 +126,32 @@ const styles = StyleSheet.create({
     button: {
         flex: 1,
         justifyContent: 'center',
-    }
+    }, 
+    acceptDecline: {
+        width: 100,
+        height: 30,
+        backgroundColor: '#FAE0E4',
+        textAlign: 'center',
+        padding: 5,
+        borderRadius: 4,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: 'black',
+        marginTop: 15,
+    },
+    takePicture: {
+        marginTop: 20, 
+        width: 100,
+        height: 50,
+        backgroundColor: '#FAE0E4',
+        textAlign: 'center',
+        padding: 5,
+        borderRadius: 4,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: 'black',
+        marginBottom: 5,
+    },
 
 
 })

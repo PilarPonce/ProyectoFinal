@@ -14,8 +14,7 @@ class Search extends Component{
         }
       }
 
-      
-
+//SEARCH
       search(){
         db.collection('posts').where('owner', '==', this.state.textoBuscador).orderBy('createdAt', 'desc').onSnapshot(
             docs => {
@@ -36,10 +35,12 @@ class Search extends Component{
           )
       }
 
+// RENDER 
       render(){
           console.log(this.state.posteos);
           return(
               <View>
+
                   <TextInput
                         style={styles.input}
                         onChangeText={(text)=>this.setState({textoBuscador: text})}
@@ -48,7 +49,8 @@ class Search extends Component{
                         value={this.state.textoBuscador}    
                         />
 
-                    <TouchableOpacity style={styles.button} onPress={()=>this.search()}>
+                    {/* BOTON SEARCH */}
+                    <TouchableOpacity style={styles.button} onPress={()=>this.search()} style={styles.botonSearch}>
                             <Text style={styles.textButton}>Search</Text>    
                     </TouchableOpacity>
 
@@ -68,6 +70,18 @@ class Search extends Component{
 }
 
 const styles = StyleSheet.create({
+    botonSearch: {
+      width: '100%',
+      height: '20%',
+      backgroundColor: '#FAE0E4',
+      textAlign: 'center',
+      padding: 5,
+      borderRadius: 4,
+      borderWidth: 1,
+      borderStyle: 'solid',
+      borderColor: 'black',
+      marginTop: 15,
+    },
     formContainer:{
         paddingHorizontal:10,
         marginTop: 20,
@@ -95,7 +109,7 @@ const styles = StyleSheet.create({
         borderColor: '#28a745'
     },
     textButton:{
-        color: '#fff'
+        color: 'black'
     }
 
 })
