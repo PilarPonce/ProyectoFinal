@@ -178,7 +178,7 @@ class Post extends Component{
                         </TouchableOpacity>
 
                         {this.props.postData.data.comments  === undefined ? 
-                            <Text>No comments yet! Make the first one </Text>:
+                            <Text >No comments yet! Make the first one </Text>:
                             <View>
                                 <Text>Comments:</Text>
                             <FlatList
@@ -189,7 +189,7 @@ class Post extends Component{
                             </View>
                         }
 
-                        {/* Formulario para nuevo comentarios */}
+                        {/* Formulario para nuevos comentarios */}
                         <View>
                             <TextInput 
                                 style={styles.input}
@@ -204,8 +204,8 @@ class Post extends Component{
                                 <TouchableOpacity style={styles.button} onPress={()=>{this.guardarComentario()}}>
                                 <Text style={styles.textButton}>Save comment</Text>
                                 </TouchableOpacity> :
-                                <TouchableOpacity style={styles.button} disabled={true} >
-                                <Text style={styles.textButton}>I'm disabled</Text>
+                                <TouchableOpacity  disabled={true} >
+                                <Text style={styles.disabled}>I'm disabled</Text>
                                 </TouchableOpacity>
                             }
                         </View>
@@ -225,7 +225,18 @@ const styles = StyleSheet.create({
     body: {
         backgroundColor: 'white',
     }, 
-
+    disabled: {
+        width: '100%',
+        height: '70%',
+        backgroundColor: '#FAE0E4',
+        textAlign: 'center',
+        padding: 5,
+        borderRadius: 4,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: 'black',
+        marginTop: 15,
+    },
     infoUser: { 
         color: 'black',
         marginBottom: 20,
