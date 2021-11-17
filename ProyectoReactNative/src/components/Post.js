@@ -3,6 +3,7 @@ import {Text, View, StyleSheet, TouchableOpacity, Modal, TextInput, Image} from 
 import { db, auth } from '../firebase/config';
 import firebase from 'firebase';
 import { FlatList } from 'react-native-gesture-handler';
+import { Icon } from 'react-native-elements'
 
 class Post extends Component{
     constructor(props){
@@ -51,7 +52,6 @@ class Post extends Component{
                 myLike: false
             })
         })
-
     }
 
 //COMENTARIOS:
@@ -137,14 +137,33 @@ class Post extends Component{
                         {
                             this.state.myLike == false ?
                                 <TouchableOpacity onPress={() => this.darLike()}>
-                                    <Text>Like</Text>
+                                    {/* <Text>Like</Text> */}
+                                        <Icon 
+                                            raised
+                                            name='heart'
+                                            type='font-awesome'
+                                            color='red'
+                                            size= '100%'
+                                            display= 'flex'
+                                            alignContent= 'flex-end'/>
                                 </TouchableOpacity> :
                                 <TouchableOpacity onPress={() => this.quitarLike()}>
                                     <Text>Dislike</Text>
+                                    <Icon 
+                                            raised
+                                            name='heart'
+                                            type='font-awesome'
+                                            color='grey'
+                                            size='100%'
+                                            display='flex'
+                                            alignContent='flex-end' />
                                 </TouchableOpacity>
                         }
                         {/* poner el like/dislike al lado del corazon con flex direction column  */}
                     </View>
+                       
+
+                        
 
                     {/* DESCRIPCION */}
                     <Text style={styles.infoPost}> @{this.props.postData.data.name}: {this.props.postData.data.texto}</Text>
@@ -251,8 +270,9 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         padding: 10,
         width: '100%',
-        height: 600,
-        backgroundColor: 'FF5C8A'
+        height: '600%',
+        backgroundColor: 'FF5C8A',
+        paddingBottom: '5%'
     },
 
     likes: {
@@ -275,6 +295,7 @@ const styles = StyleSheet.create({
         color: 'black',
         fontSize: 13, 
         marginBottom: 10, 
+        
     }, 
 
     botonDeletePost: {
