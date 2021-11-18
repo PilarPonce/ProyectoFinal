@@ -148,12 +148,14 @@ class Post extends Component{
                                             alignContent= 'flex-end'/>
                                 </TouchableOpacity> :
                                 <TouchableOpacity onPress={() => this.quitarLike()}>
-                                    <Text>Dislike</Text>
                                     <Icon 
                                             raised
                                             name='heart'
                                             type='font-awesome'
-                                            color='grey'
+                                            color='blue'
+                                            borderColor='black'
+                                            borderWidth='5'
+                                            borderStyle='solid'
                                             size='100%'
                                             display='flex'
                                             alignContent='flex-end' />

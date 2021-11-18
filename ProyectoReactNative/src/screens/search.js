@@ -16,7 +16,7 @@ class Search extends Component{
 
 //SEARCH
       search(){
-        db.collection('posts').where('owner', '==', this.state.textoBuscador).orderBy('createdAt', 'desc').onSnapshot(
+        db.collection('posts').where('owner', '==', this.state.textoBuscador).onSnapshot(
             docs => {
               console.log(docs);
               let posts = [];
@@ -54,14 +54,15 @@ class Search extends Component{
                             <Text style={styles.textButton}>Search</Text>    
                     </TouchableOpacity>
 
-                    {this.state.posteos.length === undefined ?
-                    <Text>No results</Text> :
-                    <FlatList 
-                        data= { this.state.posteos }
-                        keyExtractor = { post => post.id}
-                        renderItem = { ({item}) => <Post postData={item} />} 
-                    />
-                    }
+                    {/* PARA VER SI HAY RESULTADOS DE BUSQUEDA */}
+                    {this.state.posteos.length === 0 ?
+                      <Text>No results</Text> :
+                      <FlatList 
+                          data= { this.state.posteos }
+                          keyExtractor = { post => post.id}
+                          renderItem = { ({item}) => <Post postData={item} />} 
+                      />
+                    }  
 
               </View>
           )
