@@ -46,6 +46,8 @@ class Home extends Component{
   const styles = StyleSheet.create({
     container:{
       paddingHorizontal:10,
+      height: '100%', 
+      width:'100%', 
     },
 
   })

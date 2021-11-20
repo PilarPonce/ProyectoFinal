@@ -3,7 +3,7 @@ import {Text, View, StyleSheet, TouchableOpacity, Modal, TextInput, Image} from 
 import { db, auth } from '../firebase/config';
 import firebase from 'firebase';
 import { FlatList } from 'react-native-gesture-handler';
-import { Icon } from 'react-native-elements'
+
 
 class Post extends Component{
     constructor(props){
@@ -87,11 +87,15 @@ class Post extends Component{
 
 //DELETE POST
     deletePost(){
-        db.collection('posts').doc(this.props.postData.id).delete()
-        .then((res)=>{
-            console.log('post borrado', res);
-        })
-        .catch((error)=> console.log(error))
+       db.collection('posts').where('createdAt', '==', this.props.postData.data.createdAt)
+       .onSnapshot(
+           docs=> {
+               console.log(docs);
+               docs.forEach(doc=>{
+                   doc.ref.delete()
+               })
+           }
+       )
     }
 
 
@@ -138,27 +142,36 @@ class Post extends Component{
                             this.state.myLike == false ?
                                 <TouchableOpacity onPress={() => this.darLike()}>
                                     {/* <Text>Like</Text> */}
-                                        <Icon 
-                                            raised
-                                            name='heart'
-                                            type='font-awesome'
-                                            color='red'
-                                            size= '100%'
-                                            display= 'flex'
-                                            alignContent= 'flex-end'/>
+                                
+                                        <Image
+                                            style={
+                                                {
+                                                    height: 18,
+                                                    width: 18,
+                                                    alignSelf: 'left',
+                                                    marginBottom: 10,
+                                                    marginTop: 10,
+                                                }
+                                            }
+                                            source={{ uri: "https://img.icons8.com/small/16/000000/like.png" }}
+
+                                        />
                                 </TouchableOpacity> :
+                                
                                 <TouchableOpacity onPress={() => this.quitarLike()}>
-                                    <Icon 
-                                            raised
-                                            name='heart'
-                                            type='font-awesome'
-                                            color='blue'
-                                            borderColor='black'
-                                            borderWidth='5'
-                                            borderStyle='solid'
-                                            size='100%'
-                                            display='flex'
-                                            alignContent='flex-end' />
+                                        <Image
+                                            style={
+                                                {
+                                                    height: 18,
+                                                    width: 18,
+                                                    alignSelf: 'left',
+                                                    marginBottom: 10,
+                                                    marginTop: 10,
+                                                }
+                                            }
+                                            source={{ uri:  "https://img.icons8.com/ios-glyphs/30/fa314a/like--v1.png" }}
+
+                                        />
                                 </TouchableOpacity>
                         }
                         {/* poner el like/dislike al lado del corazon con flex direction column  */}
@@ -168,7 +181,7 @@ class Post extends Component{
                         
 
                     {/* DESCRIPCION */}
-                    <Text style={styles.infoPost}> @{this.props.postData.data.name}: {this.props.postData.data.texto}</Text>
+                    <Text style={styles.infoPost}>@{this.props.postData.data.name}: {this.props.postData.data.texto}</Text>
                         
                     {/* COMENTARIOS */}
                     <View>
@@ -180,7 +193,7 @@ class Post extends Component{
                         }
 
                         <TouchableOpacity onPress={() => this.showModal()}>
-                                <Text style={styles.infoPost} >Show Comments</Text>
+                                <Text style={styles.showComments} >Show Comments</Text>
                         </TouchableOpacity>
 
                     </View>
@@ -188,18 +201,20 @@ class Post extends Component{
     
                 {/* MODAL PARA COMENTARIOS */}
                 {   this.state.showModal ?
-                    <Modal
+                    <Modal 
                         style= {styles.modalContainer}
                         visible={this.state.showModal}
                         animationType='slide'
                         transparent={false}
+                       
                     >   
-                        <TouchableOpacity style={styles.closeButton} onPress={() => this.hideModal()}>
+                        <TouchableOpacity style={styles.closeButton} onPress={()=>this.hideModal()}>
                             <Text>X</Text>
                         </TouchableOpacity>
 
                         {this.props.postData.data.comments  === undefined ? 
                             <Text >No comments yet! Make the first one </Text>:
+                            
                             <View>
                                 <Text>Comments:</Text>
                             <FlatList
@@ -223,7 +238,7 @@ class Post extends Component{
                             {/* boton para que se guarde el comentario */}
                             {this.state.comment ?
                                 <TouchableOpacity style={styles.button} onPress={()=>{this.guardarComentario()}}>
-                                <Text style={styles.textButton}>Save comment</Text>
+                                <Text >Save comment</Text>
                                 </TouchableOpacity> :
                                 <TouchableOpacity  disabled={true} >
                                 <Text style={styles.disabled}>I'm disabled</Text>
@@ -245,7 +260,19 @@ class Post extends Component{
 const styles = StyleSheet.create({
     body: {
         backgroundColor: 'white',
+        width: '100%',
     }, 
+    contanier: {
+        marginBottom: 20,
+        borderRadius: 4,
+        borderColor: "#ccc",
+        borderWidth: 1,
+        padding: 10,
+        width: '100%',
+        height: '600%',
+        backgroundColor: 'FF5C8A',
+        paddingBottom: '5%'
+    },
     disabled: {
         width: '100%',
         height: '70%',
@@ -263,18 +290,6 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         fontSize: 20,
 
-    },
-
-    contanier: {
-        marginBottom: 20,
-        borderRadius: 4,
-        borderColor: "#ccc",
-        borderWidth: 1,
-        padding: 10,
-        width: '100%',
-        height: '600%',
-        backgroundColor: 'FF5C8A',
-        paddingBottom: '5%'
     },
 
     likes: {
@@ -295,9 +310,19 @@ const styles = StyleSheet.create({
 
     infoPost: {
         color: 'black',
-        fontSize: 13, 
+        fontSize: 15, 
         marginBottom: 10, 
         
+    }, 
+    showComments: {
+        backgroundColor: '#FBB1BD',
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: 'center',
+        borderRadius: 4,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: '#FF7096'
     }, 
 
     botonDeletePost: {
@@ -318,14 +343,14 @@ const styles = StyleSheet.create({
     textBoton:{
         fontWeight: 'bold',
     },
-    modalContainer:{
+    modalContainer: {
         width: '97%',
-        borderRadius:4,
-        padding:5,
+        borderRadius: 4,
+        padding: 5,
         alignSelf: 'center',
-        boxShadow: 'rgb(204 204 204) 0px 0px 9px 7px', //no funciona en mobile
+        boxShadow: 'rgb(204 204 204) 0px 0px 9px 7px',
         marginTop: 20,
-        marginBottom: 10 
+        marginBottom: 10,
     },
     closeButton:{
         color: '#fff',
@@ -346,18 +371,16 @@ const styles = StyleSheet.create({
         marginVertical:10,
     },
     button:{
-        backgroundColor:'#28a745',
+        backgroundColor:'#FBB1BD',
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: 'center',
         borderRadius:4, 
         borderWidth:1,
         borderStyle: 'solid',
-        borderColor: '#28a745'
+        borderColor: '#FBB1BD'
     },
-    textButton:{
-        color: '#fff'
-    }
+   
 })
 
 export default Post

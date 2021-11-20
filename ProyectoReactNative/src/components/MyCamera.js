@@ -119,6 +119,7 @@ const styles = StyleSheet.create({
     },
     cameraBody: {
         flex: 6,
+        
     },
     button: {
         flex: 1,

@@ -9,7 +9,8 @@ class Search extends Component{
         super(props);
         this.state ={
           textoBuscador: '',
-          posteos: []
+          // posteos: null,
+          posteos: [],
 
         }
       }
@@ -55,13 +56,21 @@ class Search extends Component{
                     </TouchableOpacity>
 
                     {/* PARA VER SI HAY RESULTADOS DE BUSQUEDA */}
-                    {this.state.posteos.length === 0 ?
-                      <Text>No results</Text> :
-                      <FlatList 
-                          data= { this.state.posteos }
-                          keyExtractor = { post => post.id}
-                          renderItem = { ({item}) => <Post postData={item} />} 
-                      />
+
+
+                    {this.state.posteos === null ?
+                      this.state.posteos.lenght === 0 ? 
+                        <Text>No results</Text> : 
+                         
+                        <FlatList
+                          data={this.state.posteos}
+                          keyExtractor={post => post.id}
+                          renderItem={({ item }) => <Post postData={item} />}
+                        /> : 
+                        <Text> </Text>
+
+                  
+                     
                     }  
 
               </View>

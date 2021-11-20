@@ -79,10 +79,10 @@ class Profile extends Component{
           {/* POSTS DEL USUARIO */}
           <View style={styles.containerPost}>
           
-          <FlatList 
-            data= { this.state.posteos }
-            keyExtractor = { post => post.id}
-            renderItem = { ({item}) => <Post postData={item} />} 
+          <FlatList
+            data={this.state.posteos}
+            keyExtractor={post => post.id}
+            renderItem={({ item }) => <Post postData={item} />}
           />
           </View>
 
@@ -108,6 +108,8 @@ const styles = StyleSheet.create({
     },
     infoUser:{
         marginBottom:10,
+        fontSize: 18, 
+
     },
     touchable:{
         padding: 10,

@@ -49,12 +49,12 @@ class PostForm extends Component{
                         <MyCamera onImageUpload={(url) => { this.onImageUpload(url) }} /> :
                     <View> 
                         <TextInput
-                        style={styles.input}
-                        onChangeText={(text)=>this.setState({textoPost: text})}
-                        placeholder='Type here...'
-                        keyboardType='default'
-                        multiline
-                        value={this.state.textoPost}    
+                            style={styles.input}
+                            onChangeText={(text)=>this.setState({textoPost: text})}
+                            placeholder='Type here...'
+                            keyboardType='default'
+                            multiline
+                            value={this.state.textoPost}    
                         />
                         <TouchableOpacity style={styles.button} onPress={()=>this.submitPost()}>
                             <Text>Save Post</Text>    
