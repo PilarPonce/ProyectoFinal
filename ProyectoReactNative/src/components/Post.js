@@ -101,10 +101,8 @@ class Post extends Component{
 
 //RENDER 
     render(){
-        console.log(this.props);
         return(
         <View style={styles.body}> 
-            
             <View style={styles.contanier}>
 
                 {/* DELETE POST */}
@@ -200,53 +198,50 @@ class Post extends Component{
                 </View>
     
                 {/* MODAL PARA COMENTARIOS */}
-                {   this.state.showModal ?
-                    <Modal 
-                        style= {styles.modalContainer}
-                        visible={this.state.showModal}
-                        animationType='slide'
-                        transparent={false}
-                       
-                    >   
-                        <TouchableOpacity style={styles.closeButton} onPress={()=>this.hideModal()}>
-                            <Text>X</Text>
-                        </TouchableOpacity>
+                {this.state.showModal ?
+                    <Modal style={styles.modalContainer} visible={this.state.showModal} animationType='slide' transparent={true}>
+                        <View style={styles.modalComentarios}>
+                            <TouchableOpacity style={styles.closeButton} onPress={() => this.hideModal()}>
+                                <Text>X</Text>
+                            </TouchableOpacity>
 
-                        {this.props.postData.data.comments  === undefined ? 
-                            <Text >No comments yet! Make the first one </Text>:
-                            
+                    {this.props.postData.data.comments === undefined ?
+                        <Text >No comments yet! Make the first one </Text> :
+
                             <View>
                                 <Text>Comments:</Text>
-                            <FlatList
-                                data={this.props.postData.data.comments} 
-                                keyextractor= {(comment)=>comment.createdAt.toString()} 
-                                renderItem={ ({item}) => <Text>{item.author}: {item.comment}</Text>}
-                            />
-                            </View>
-                        }
-
-                        {/* Formulario para nuevos comentarios */}
-                        <View>
-                            <TextInput 
-                                style={styles.input}
-                                placeholder="Comment..."
-                                keyboardType="default"
-                                multiline
-                                onChangeText={text => this.setState({comment: text})}
-                                value={this.state.comment}
-                            />
-                            {/* boton para que se guarde el comentario */}
-                            {this.state.comment ?
-                                <TouchableOpacity style={styles.button} onPress={()=>{this.guardarComentario()}}>
+                                    <FlatList
+                                        data={this.props.postData.data.comments}
+                                        keyextractor={(comment) => comment.createdAt.toString()}
+                                        renderItem={({ item }) => <Text>{item.author}: {item.comment}</Text>}
+                                    />
+                            </View> 
+                }
+                    <View>
+                        <TextInput 
+                            style={styles.input}
+                            placeholder="Comment..."
+                            keyboardType="default"
+                            multiline
+                            onChangeText={text => this.setState({comment: text})}
+                            value={this.state.comment}
+                        />
+                        
+                        {/* boton para que se guarde el comentario */}
+                         {this.state.comment ?
+                            <TouchableOpacity style={styles.button} onPress={()=>{this.guardarComentario()}}>
                                 <Text >Save comment</Text>
-                                </TouchableOpacity> :
-                                <TouchableOpacity  disabled={true} >
+                            </TouchableOpacity> :
+                            
+                            <TouchableOpacity  disabled={true} >
                                 <Text style={styles.disabled}>I'm disabled</Text>
-                                </TouchableOpacity>
-                            }
-                        </View>
-
-                    </Modal>    :
+                            </TouchableOpacity>
+                                    }
+                    </View>
+                        
+                    </View>
+                    </Modal> :
+                    
                     <Text></Text>
                 } 
                 
@@ -314,6 +309,20 @@ const styles = StyleSheet.create({
         marginBottom: 10, 
         
     }, 
+    modalContainer: {
+        
+    },
+    modalComentarios: {
+        backgroundColor: '#f8edeb',
+        width: '97%',
+        height: '40vh',
+        borderRadius: 4,
+        padding: 5,
+        alignSelf: 'center',
+        // boxShadow: 'rgb(204 204 204) 0px 0px 9px 7px',
+        marginTop: 500,
+        marginBottom: 200,
+    },
     showComments: {
         backgroundColor: '#FBB1BD',
         paddingHorizontal: 10,
@@ -322,7 +331,7 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         borderWidth: 1,
         borderStyle: 'solid',
-        borderColor: '#FF7096'
+        borderColor: '#b7b7a4'
     }, 
 
     botonDeletePost: {
@@ -343,15 +352,7 @@ const styles = StyleSheet.create({
     textBoton:{
         fontWeight: 'bold',
     },
-    modalContainer: {
-        width: '97%',
-        borderRadius: 4,
-        padding: 5,
-        alignSelf: 'center',
-        boxShadow: 'rgb(204 204 204) 0px 0px 9px 7px',
-        marginTop: 20,
-        marginBottom: 10,
-    },
+    
     closeButton:{
         color: '#fff',
         padding: 5,
