@@ -245,7 +245,7 @@ class Post extends Component {
 
 const styles = StyleSheet.create({
     body: {
-        backgroundColor: 'white',
+        //backgroundColor: 'white',
         width: '100%',
         height: '100%'
     },
@@ -257,8 +257,9 @@ const styles = StyleSheet.create({
         padding: 10,
         width: '100%',
         height: '100%',
-        backgroundColor: 'FF5C8A',
-        paddingBottom: '5%'
+        backgroundColor: 'white',
+        paddingBottom: '5%',
+        
     },
     disabled: {
         width: '100%',
@@ -316,12 +317,13 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: 'center',
+        fontWeight: 'bold'
     },
 
     botonDeletePost: {
         width: 100,
         height: 30,
-        backgroundColor: '#fea1cd',
+        backgroundColor: '#FF85A1',
         textAlign: 'center',
         padding: 5,
         borderRadius: 4,
