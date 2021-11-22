@@ -247,6 +247,7 @@ const styles = StyleSheet.create({
     body: {
         backgroundColor: 'white',
         width: '100%',
+        height: '100%'
     },
     contanier: {
         marginBottom: 20,
@@ -255,7 +256,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         padding: 10,
         width: '100%',
-        height: '600%',
+        height: '100%',
         backgroundColor: 'FF5C8A',
         paddingBottom: '5%'
     },

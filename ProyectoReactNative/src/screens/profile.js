@@ -96,8 +96,9 @@ class Profile extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
-    marginHorizontal: 10
+    //marginTop: 20,
+    //marginHorizontal: 10,
+    backgroundColor: 'white'
   },
   user: {
     fontSize: 20,
@@ -128,7 +129,8 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     width: '60%',
     display: 'flex',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    marginBottom: 20
   },
   tituloPosts: {
     fontSize: 15,
@@ -146,10 +148,11 @@ const styles = StyleSheet.create({
   botonLogout: {
     fontWeight: 'bold',
     color: 'black',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   containerPost: {
     paddingHorizontal: 10,
+    backgroundColor: 'white'
   },
   closeButton: {
     color: '#fff',
