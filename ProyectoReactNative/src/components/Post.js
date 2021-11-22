@@ -300,15 +300,18 @@ const styles = StyleSheet.create({
 
     },
     modalComentarios: {
-        backgroundColor: '#f8edeb',
-        width: '100%',
+        backgroundColor: '#FAE0E4',
+        width: '90%',
         height: '40vh',
+        borderRadius: 4,
         padding: 5,
-        marginTop: 500,
+        alignSelf: 'center',
+        boxShadow: 'rgb(204 204 204) 0px 0px 9px 7px',
+        marginTop: '50%',
         marginBottom: 200,
     },
     showComments: {
-        backgroundColor: '#f8edeb',
+        backgroundColor: '#FAE0E4',
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: 'center',

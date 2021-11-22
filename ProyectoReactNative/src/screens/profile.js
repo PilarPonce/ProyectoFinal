@@ -111,13 +111,16 @@ const styles = StyleSheet.create({
 
   },
   modalInformation: {
-    backgroundColor: '#f8edeb',
-    width: '100%',
-    height: '30vh',
+    backgroundColor: '#FAE0E4',
+    width: '90%',
+    height: '17vh',
+    borderRadius: 4,
     padding: 5,
-    marginTop: 180,
-    marginBottom: 500,
-  },
+    alignSelf: 'center',
+    boxShadow: 'rgb(204 204 204) 0px 0px 9px 7px',
+    marginTop: '50%',
+    marginBottom: 200,
+},
   touchable: {
     padding: 10,
     backgroundColor: '#FF7096',
