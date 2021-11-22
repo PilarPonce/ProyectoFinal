@@ -28,7 +28,7 @@ class Menu extends Component {
         }
     }
 
-    //para que se quede logueado
+// COMPONENT DID MOUNT
     componentDidMount(){
         auth.onAuthStateChanged(user => {
             if(user){
@@ -40,11 +40,12 @@ class Menu extends Component {
         })
     }
 
+    // REGISTER
     register(email, pass, userName) {
         auth.createUserWithEmailAndPassword(email, pass)
             .then(() => {
                 console.log('registrado')
-                this.saveName(userName) //para que se guarde el nombre de usuario
+                this.saveName(userName) 
                 this.setState({
                     errorRegister:''
                 })
@@ -56,6 +57,7 @@ class Menu extends Component {
                 })
             })
     }
+
 
     saveName(userName){
         const user = firebase.auth().currentUser;
@@ -74,6 +76,7 @@ class Menu extends Component {
         }
     }
 
+    // LOGIN
     login(email, pass){
         auth.signInWithEmailAndPassword(email, pass) 
             .then((response) =>{
@@ -95,6 +98,7 @@ class Menu extends Component {
             })
     }
 
+    // LOGOUT
     logout(){
         auth.signOut()
             .then( (res)=>{
@@ -107,12 +111,13 @@ class Menu extends Component {
     }
 
      
+    // RENDER
     render() {
         return (
             <NavigationContainer>
                 {this.state.logueado == false ?
                 <Drawer.Navigator>
-                    <Drawer.Screen name="Registro" component={() => <Register register={(email, pass, userName) => this.register(email, pass, userName)} errorRegister= {this.state.errorRegister} />} />
+                    <Drawer.Screen name="Register" component={() => <Register register={(email, pass, userName) => this.register(email, pass, userName)} errorRegister= {this.state.errorRegister} />} />
                     <Drawer.Screen name ="Login" component={()=> <Login login={(email, pass)=> this.login(email, pass)} errorLogin={this.state.errorLogin}/>}/>
                 </Drawer.Navigator>:
                 <Drawer.Navigator>

@@ -57,8 +57,11 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         marginVertical:10,
     },
+    textButton: {
+        color: 'black'
+    },
     button: {
-        backgroundColor: '#FF7096',
+        backgroundColor: '#FBB1BD',
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: 'center',
@@ -76,9 +79,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: '#FBB1BD'
-    },
-    textButton:{
-        color: '#fff'
     },
     mensajeError:{
         color: 'red',

@@ -99,11 +99,11 @@ class MyCamera extends Component{
                                     type={Camera.Constants.Type.back}
                                     ref={reference => this.camera = reference}
                                 />
-                                <TouchableOpacity style={styles.boton} onPress={() => this.takePicture()}>
-                                    <Text style={styles.botonText}>Take Picture</Text>
+                                <TouchableOpacity style={styles.botonPicture} onPress={() => this.takePicture()}>
+                                    <Text style={styles.botonText}>TAKE PICTURE</Text>
                                 </TouchableOpacity>
                             </View> : 
-                        <Text style= {styles.message}> You don´t have permission to use the camera </Text>  // render mensaje 
+                        <Text style= {styles.message}> YOU DON´T HAVE PERMISSION TO USE THE CAMERA </Text> 
                 }
             </View>
         )
@@ -126,18 +126,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: 'red'
     },
-    boton:{
-        display: 'flex',
-        alignSelf: 'center',
+    botonPicture:{
         backgroundColor: '#F7CAD0',
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: 'center',
         borderRadius: 4,
         borderWidth: 1,
-        borderStyle: 'solid',
+       
         borderColor: 'black',
-        marginTop: 10
+        marginTop: 10, 
+        width: '100%'
     },
     botonAccept:{
         display: 'flex',
@@ -148,7 +147,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         borderRadius: 4,
         borderWidth: 1,
-        borderStyle: 'solid',
         borderColor: 'black',
         marginTop: 10
     },
@@ -161,7 +159,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         borderRadius: 4,
         borderWidth: 1,
-        borderStyle: 'solid',
         borderColor: 'black',
         marginTop: 10
     },
@@ -170,8 +167,7 @@ const styles = StyleSheet.create({
     },
     message:{
         color: 'red',
-        fontWeight: 'bold',
-        fontSize: 20,
+        fontSize: 25,
         display: 'flex',
         alignSelf: 'center'
     }

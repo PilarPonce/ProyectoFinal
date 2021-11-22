@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
         borderColor: '#FBB1BD'
     },
     textButton: {
-        color: '#fff'
+        color: 'black'
     },
     mensajeError:{
         color: 'red',

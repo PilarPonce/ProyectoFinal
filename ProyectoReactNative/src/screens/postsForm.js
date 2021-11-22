@@ -15,6 +15,7 @@ class PostForm extends Component{
         }
     }
 
+    //SUBMIT POST
     submitPost(){
         console.log('posteando...');
         db.collection('posts').add({
@@ -24,22 +25,24 @@ class PostForm extends Component{
             createdAt: Date.now(),
             photo: this.state.url,
         })
-        .then( ()=>{ //Limpiar el form de carga
+        .then( ()=>{ 
             this.setState({
                 textoPost:'',
             })
-            //Redirección
             this.props.drawerProps.navigation.navigate('Home')
         })
         .catch()
     }
 
+// IMAGE UPLOAD
     onImageUpload (url){
         this.setState({
             showCamera: false,
             url: url,
         })
     }
+
+    // RENDER 
     render(){
         return(
             <View style={styles.formContainer}>
@@ -47,7 +50,7 @@ class PostForm extends Component{
                 {
                     this.state.showCamera ?
                         <MyCamera onImageUpload={(url) => { this.onImageUpload(url) }} /> :
-                    <View> 
+                    <View styles= {styles.textInput}> 
                         <TextInput
                             style={styles.input}
                             onChangeText={(text)=>this.setState({textoPost: text})}
@@ -57,7 +60,7 @@ class PostForm extends Component{
                             value={this.state.textoPost}    
                         />
                         <TouchableOpacity style={styles.button} onPress={()=>this.submitPost()}>
-                            <Text>Save Post</Text>    
+                            <Text>SAVE POST</Text>    
                         </TouchableOpacity>
                     
                     </View>
@@ -75,15 +78,15 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '95%'
     },
+    textInput: {
+        borderColor: 'black',
+    },
     input:{
-        height:100,
+        height: 100,
         paddingVertical:15,
         paddingHorizontal: 10,
-        borderWidth:1,
-        borderColor: '#ccc',
-        borderStyle: 'solid',
-        borderRadius: 6,
         marginVertical:10,
+        borderColor: 'black',
     },
     button:{
         backgroundColor:'#FF99AC',
@@ -92,8 +95,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         borderRadius:4, 
         borderWidth:1,
-        borderStyle: 'solid',
-        borderColor: '#FF99AC'
     },
     textButton:{
         color: '#fff'
