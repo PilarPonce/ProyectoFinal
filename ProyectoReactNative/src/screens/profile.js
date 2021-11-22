@@ -13,6 +13,8 @@ class Profile extends Component {
     }
   }
 
+
+//COMPONENT DID MOUNT
   componentDidMount() {
     db.collection('posts').where('owner', '==', auth.currentUser.email).orderBy('createdAt', 'desc').onSnapshot(
       docs => {
@@ -33,6 +35,8 @@ class Profile extends Component {
     )
   }
 
+  //MODAL INFORMATION
+
   showModal() {
     this.setState({
       showModal: true,
@@ -46,14 +50,15 @@ class Profile extends Component {
   }
 
 
+  // /RENDER 
   render() {
     console.log(this.state.posteos);
     return (
       <View style={styles.container}>
         <Text style={styles.user}>  @{this.props.userData.displayName}</Text>
 
-        <TouchableOpacity onPress={() => this.showModal()}>
-          <Text style={styles.userInformation} >User Information</Text>
+        <TouchableOpacity onPress={() => this.showModal()} style= {styles.info}>
+          <Text style={styles.userInformation}> tap here to see more user information </Text>
         </TouchableOpacity>
 
         {/* modal user information */}
@@ -73,7 +78,12 @@ class Profile extends Component {
           </View>
         </Modal>
 
-        <Text style={styles.tituloPosts}>All your posts:</Text>
+        { this.state.posteos === 0 ?
+          <Text style={styles.tituloPosts}>All your posts:</Text> : 
+          <Text> You don´t have any posts yet! Go make the first one</Text> 
+        }
+
+        {/* <Text style={styles.tituloPosts}>All your posts:</Text> */}
 
         {/* POSTS DEL USUARIO */}
         <View style={styles.containerPost}>
@@ -111,6 +121,15 @@ const styles = StyleSheet.create({
     fontSize: 18,
 
   },
+  userInformation: {
+    fontSize: 15,
+    marginHorizontal: 10,
+    marginBottom: 10,
+  },
+  info: {
+    display: 'flex',
+    alignContent: 'flex-end'
+  },
   modalInformation: {
     backgroundColor: '#FAE0E4',
     width: '90%',
@@ -122,6 +141,13 @@ const styles = StyleSheet.create({
     marginTop: '50%',
     marginBottom: 200,
 },
+  
+  tituloPosts: {
+    fontSize: 15,
+    marginLeft: 10,
+    marginBottom: 10
+  },
+
   touchable: {
     padding: 10,
     backgroundColor: '#FF7096',
@@ -131,19 +157,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignSelf: 'center',
     marginBottom: 20
-  },
-  tituloPosts: {
-    fontSize: 15,
-    fontWeight: 'bold',
-    marginLeft: 10,
-    marginBottom: 10
-  },
-  userInformation: {
-    fontSize: 15,
-    fontWeight: 'bold',
-    marginHorizontal: 10,
-    marginBottom: 10,
-    textDecorationLine: 'underline',
   },
   botonLogout: {
     fontWeight: 'bold',
