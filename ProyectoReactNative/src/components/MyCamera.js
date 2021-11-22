@@ -71,7 +71,20 @@ class MyCamera extends Component{
             <View style= {styles.container}>
 
                 {this.state.permission ?
-                    this.state.showCamera === false ?
+                    this.state.showCamera === true ?
+                     <View style= {styles.container}> 
+
+                                <Camera
+                                    style={styles.cameraBody}
+                                    type={Camera.Constants.Type.back}
+                                    ref={reference => this.camera = reference}
+                                />
+                                
+                                <TouchableOpacity style={styles.botonPicture} onPress={() => this.takePicture()}>
+                                    <Text style={styles.botonText}>TAKE PICTURE</Text>
+                                </TouchableOpacity>
+
+                            </View> : 
                         <React.Fragment>
                             <Image
                                 style={styles.cameraBody}
@@ -79,29 +92,15 @@ class MyCamera extends Component{
                             />
                             <View>
                                 <TouchableOpacity  style={styles.botonAccept} onPress={() => this.savePhoto()}>
-                                    <Text  style={styles.botonText}> Accept </Text>
+                                    <Text  style={styles.botonText}> ACCEPT </Text>
                                 </TouchableOpacity>
 
                                 <TouchableOpacity style={styles.botonDecline} onPress={() => this.clear()}>
-                                    <Text style={styles.botonText}> Decline </Text>
+                                    <Text style={styles.botonText}> DECLINE </Text>
                                 </TouchableOpacity>   
                             </View>
 
-                        </React.Fragment> :
-
-                            <View style= {styles.container}> 
-
-                                <Camera
-                                    style={styles.cameraBody}
-                                    type={Camera.Constants.Type.back}
-                                    ref={reference => this.camera = reference}
-                                />
-
-                                
-                                <TouchableOpacity style={styles.botonPicture} onPress={() => this.takePicture()}>
-                                    <Text style={styles.botonText}>TAKE PICTURE</Text>
-                                </TouchableOpacity>
-                            </View> : 
+                        </React.Fragment> : 
                         <Text style= {styles.message}> YOU DON´T HAVE PERMISSION TO USE THE CAMERA </Text> 
                 }
             </View>

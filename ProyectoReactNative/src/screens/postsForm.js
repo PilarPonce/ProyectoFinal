@@ -79,6 +79,9 @@ const styles = StyleSheet.create({
     },
     textInput: {
         borderColor: 'black',
+        borderRadius: 2, 
+        borderStyle: 'solid',
+        borderWidth: 1,
     },
     input:{
         height: 100,
@@ -86,6 +89,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         marginVertical:10,
         borderColor: 'black',
+        borderStyle: 'solid',
+
     },
     button:{
         backgroundColor:'#FF99AC',
