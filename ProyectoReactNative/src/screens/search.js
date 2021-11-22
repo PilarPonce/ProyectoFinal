@@ -68,9 +68,6 @@ class Search extends Component{
                           renderItem={({ item }) => <Post postData={item} />}
                         /> : 
                         <Text> </Text>
-
-                  
-                     
                     }  
 
               </View>

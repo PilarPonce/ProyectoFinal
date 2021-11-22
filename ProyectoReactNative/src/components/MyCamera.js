@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Text, TouchableOpacity, View, StyleSheet, TextInput, Image } from 'react-native';
+import { Text, TouchableOpacity, View, StyleSheet, Image } from 'react-native';
 import { Camera } from 'expo-camera';
-import firebase from 'firebase';
-import { db, storage } from '../firebase/config';
+import { storage } from '../firebase/config';
 
 class MyCamera extends Component{
     constructor(props){
@@ -14,7 +13,7 @@ class MyCamera extends Component{
         }
     }
 
-    //component did mount
+
     componentDidMount() {
         Camera.requestCameraPermissionsAsync()
             .then(() => {
@@ -71,34 +70,34 @@ class MyCamera extends Component{
         return(
             <View style= {styles.container}>
 
-                {
-                    this.state.permission ?
+                {this.state.permission ?
+                    this.state.showCamera === false ?
+                        <React.Fragment>
+                            <Image
+                                style={styles.cameraBody}
+                                source={{ uri: this.state.photo }}
+                            />
+                            <View>
+                                <TouchableOpacity  style={styles.botonAccept} onPress={() => this.savePhoto()}>
+                                    <Text  style={styles.botonText}> Accept </Text>
+                                </TouchableOpacity>
 
-                        this.state.showCamera === false ?
+                                <TouchableOpacity style={styles.botonDecline} onPress={() => this.clear()}>
+                                    <Text style={styles.botonText}> Decline </Text>
+                                </TouchableOpacity>   
+                            </View>
 
-                            <React.Fragment>
-                                <Image
-                                    style={styles.cameraBody}
-                                    source={{ uri: this.state.photo }}
-
-                                />
-                                <View>
-                                    <TouchableOpacity  style={styles.botonAccept} onPress={() => this.savePhoto()}>
-                                        <Text  style={styles.botonText}> Accept </Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity  style={styles.botonDecline} onPress={() => this.clear()}>
-                                        <Text  style={styles.botonText}> Decline </Text>
-                                    </TouchableOpacity>
-                                </View>
-
-                            </React.Fragment> :
+                        </React.Fragment> :
 
                             <View style= {styles.container}> 
+
                                 <Camera
                                     style={styles.cameraBody}
                                     type={Camera.Constants.Type.back}
                                     ref={reference => this.camera = reference}
                                 />
+
+                                
                                 <TouchableOpacity style={styles.botonPicture} onPress={() => this.takePicture()}>
                                     <Text style={styles.botonText}>TAKE PICTURE</Text>
                                 </TouchableOpacity>

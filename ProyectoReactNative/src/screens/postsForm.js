@@ -17,13 +17,12 @@ class PostForm extends Component{
 
     //SUBMIT POST
     submitPost(){
-        console.log('posteando...');
         db.collection('posts').add({
             owner: auth.currentUser.email,
             name: auth.currentUser.displayName,
             texto: this.state.textoPost,
             createdAt: Date.now(),
-            photo: this.state.url,
+            photo: this.state.url, 
         })
         .then( ()=>{ 
             this.setState({
