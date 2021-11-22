@@ -55,11 +55,17 @@ class Profile extends Component {
     console.log(this.state.posteos);
     return (
       <View style={styles.container}>
-        <Text style={styles.user}>  @{this.props.userData.displayName}</Text>
+        
+        <View style= {styles.userContainer}>
+          
 
-        <TouchableOpacity onPress={() => this.showModal()} style= {styles.info}>
-          <Text style={styles.userInformation}> tap here to see more user information </Text>
-        </TouchableOpacity>
+          <TouchableOpacity onPress={() => this.showModal()} style={styles.info}>
+            <Text style={styles.userInformation}> tap here to see more user information </Text>
+          </TouchableOpacity>
+
+          <Text style={styles.user}>  @{this.props.userData.displayName}</Text>
+        </View>
+       
 
         {/* modal user information */}
         <Modal visible={this.state.showModal} animationType='slide' transparent={true} >
@@ -111,6 +117,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     height: '100%'
   },
+  userContainer: {
+    display: 'flex',
+    flexDirection: 'column'
+
+  },
   user: {
     fontSize: 20,
     marginTop: 20,
@@ -132,6 +143,7 @@ const styles = StyleSheet.create({
 
   info: {
     marginLeft: '60%', 
+    marginTop: '1%'
     
   },
   modalInformation: {
@@ -146,7 +158,7 @@ const styles = StyleSheet.create({
     marginBottom: 200,
 },
   anyPost: {
-    marginTop: '10%', 
+    marginTop: '1%', 
     marginLeft: '1%'
   },
   
