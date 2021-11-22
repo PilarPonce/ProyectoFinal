@@ -80,7 +80,7 @@ class Profile extends Component {
 
         { this.state.posteos === 0 ?
           <Text style={styles.tituloPosts}>All your posts:</Text> : 
-          <Text> You don´t have any posts yet! Go make the first one</Text> 
+          <Text style= {styles.anyPost}> You don´t have any posts yet! Go make the first one</Text> 
         }
 
         {/* <Text style={styles.tituloPosts}>All your posts:</Text> */}
@@ -108,13 +108,15 @@ const styles = StyleSheet.create({
   container: {
     //marginTop: 20,
     //marginHorizontal: 10,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    height: '100%'
   },
   user: {
     fontSize: 20,
     marginTop: 20,
     marginBottom: 30,
-    fontWeight: 'bold'
+    fontWeight: 'bold', 
+    marginLeft: '1%'
   },
   infoUser: {
     marginBottom: 10,
@@ -125,10 +127,12 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginHorizontal: 10,
     marginBottom: 10,
+    color: 'grey', 
   },
+
   info: {
-    display: 'flex',
-    alignContent: 'flex-end'
+    marginLeft: '60%', 
+    
   },
   modalInformation: {
     backgroundColor: '#FAE0E4',
@@ -141,6 +145,10 @@ const styles = StyleSheet.create({
     marginTop: '50%',
     marginBottom: 200,
 },
+  anyPost: {
+    marginTop: '10%', 
+    marginLeft: '1%'
+  },
   
   tituloPosts: {
     fontSize: 15,
@@ -149,14 +157,13 @@ const styles = StyleSheet.create({
   },
 
   touchable: {
-    padding: 10,
     backgroundColor: '#FF7096',
-    marginTop: 30,
-    borderRadius: 4,
-    width: '60%',
     display: 'flex',
     alignSelf: 'center',
-    marginBottom: 20
+    padding: 10,
+    width: '50%',
+    marginTop: '55%',
+    marginBottom: '10%'
   },
   botonLogout: {
     fontWeight: 'bold',
