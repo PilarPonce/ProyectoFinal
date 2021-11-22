@@ -1,26 +1,26 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { db, auth } from '../firebase/config';
-import {Text, TouchableOpacity, View, StyleSheet, Image, ActivityIndicator, FlatList, TextInput, Modal} from 'react-native';
+import { Text, TouchableOpacity, View, StyleSheet, Image, ActivityIndicator, FlatList, TextInput, Modal } from 'react-native';
 import Post from '../components/Post';
 
-class Profile extends Component{
-  constructor(props){
+class Profile extends Component {
+  constructor(props) {
     super(props);
-    this.state ={
+    this.state = {
       posteos: [],
-      showModal: false, 
-      
+      showModal: false,
+
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     db.collection('posts').where('owner', '==', auth.currentUser.email).orderBy('createdAt', 'desc').onSnapshot(
       docs => {
         console.log(docs);
         let posts = [];
-        docs.forEach( doc => {
+        docs.forEach(doc => {
           posts.push({
-            id: doc.id,   
+            id: doc.id,
             data: doc.data(),
           })
         })
@@ -37,7 +37,7 @@ class Profile extends Component{
     this.setState({
       showModal: true,
     })
-  } 
+  }
 
   hideModal() {
     this.setState({
@@ -46,22 +46,19 @@ class Profile extends Component{
   }
 
 
-  render(){
+  render() {
     console.log(this.state.posteos);
-    return(
+    return (
       <View style={styles.container}>
-          <Text style={styles.user}>  @{this.props.userData.displayName}</Text>
-          {/* podemos hacer como en el modal de comentarios y ponemos user information y que se abra y ahi adentro ponemos el email...  */}
-         
+        <Text style={styles.user}>  @{this.props.userData.displayName}</Text>
+
         <TouchableOpacity onPress={() => this.showModal()}>
           <Text style={styles.userInformation} >User Information</Text>
         </TouchableOpacity>
 
-          <Modal
-            visible={this.state.showModal}
-            animationType='slide'
-            transparent={false}
-          >
+        {/* modal user information */}
+        <Modal visible={this.state.showModal} animationType='slide' transparent={true} >
+          <View style={styles.modalInformation}>
             <TouchableOpacity style={styles.closeButton} onPress={() => this.hideModal()}>
               <Text>X</Text>
             </TouchableOpacity>
@@ -73,83 +70,93 @@ class Profile extends Component{
               <Text style={styles.infoUser}> User Posts: {this.state.posteos.length} </Text>
             </View>
 
-          </Modal> 
-  
-          <Text style={styles.tituloPosts}>All your posts:</Text>
-          {/* POSTS DEL USUARIO */}
-          <View style={styles.containerPost}>
-          
+          </View>
+        </Modal>
+
+        <Text style={styles.tituloPosts}>All your posts:</Text>
+
+        {/* POSTS DEL USUARIO */}
+        <View style={styles.containerPost}>
+
           <FlatList
             data={this.state.posteos}
             keyExtractor={post => post.id}
             renderItem={({ item }) => <Post postData={item} />}
           />
-          </View>
+        </View>
 
-          {/* BOTON DE LOGOUT */}
-          <TouchableOpacity style={styles.touchable} onPress={()=>this.props.logout()}>
-            <Text style={styles.botonLogout}>Logout</Text>
-          </TouchableOpacity>
-      </View>       
+        {/* BOTON DE LOGOUT */}
+        <TouchableOpacity style={styles.touchable} onPress={() => this.props.logout()}>
+          <Text style={styles.botonLogout}>Logout</Text>
+        </TouchableOpacity>
+      </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
-    container:{
-        marginTop: 20,
-        marginHorizontal:10
-    },
-    user:{
-        fontSize:20,
-        marginTop:20,
-        marginBottom:30,
-        fontWeight: 'bold'
-    },
-    infoUser:{
-        marginBottom:10,
-        fontSize: 18, 
+  container: {
+    marginTop: 20,
+    marginHorizontal: 10
+  },
+  user: {
+    fontSize: 20,
+    marginTop: 20,
+    marginBottom: 30,
+    fontWeight: 'bold'
+  },
+  infoUser: {
+    marginBottom: 10,
+    fontSize: 18,
 
-    },
-    touchable:{
-        padding: 10,
-        backgroundColor: '#FF7096',
-        marginTop: 30,
-        borderRadius: 4,
-        width: '60%',
-        display: 'flex',
-        alignSelf: 'center'
-    },
-    tituloPosts:{
-      fontSize: 15,
-      fontWeight: 'bold',
-      marginLeft: 10,
-      marginBottom: 10
-    },
-    userInformation:{
-      fontSize: 15,
-      fontWeight: 'bold',
-      marginHorizontal: 10,
-      marginBottom: 10,
-      textDecorationLine: 'underline',
-    },
-    botonLogout:{
-          fontWeight: 'bold',
-          color:'black',
-          textAlign: 'center'
-      },
-    containerPost:{
-        paddingHorizontal:10,
-      }, 
-    closeButton: {
-      color: '#fff',
-      padding: 5,
-      backgroundColor: '#dc3545',
-      alignSelf: 'flex-end',
-      borderRadius: 4,
-      paddingHorizontal: 8,
-    },
-      
+  },
+  modalInformation: {
+    backgroundColor: '#f8edeb',
+    width: '100%',
+    height: '30vh',
+    padding: 5,
+    marginTop: 180,
+    marginBottom: 500,
+  },
+  touchable: {
+    padding: 10,
+    backgroundColor: '#FF7096',
+    marginTop: 30,
+    borderRadius: 4,
+    width: '60%',
+    display: 'flex',
+    alignSelf: 'center'
+  },
+  tituloPosts: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    marginLeft: 10,
+    marginBottom: 10
+  },
+  userInformation: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    marginHorizontal: 10,
+    marginBottom: 10,
+    textDecorationLine: 'underline',
+  },
+  botonLogout: {
+    fontWeight: 'bold',
+    color: 'black',
+    textAlign: 'center'
+  },
+  containerPost: {
+    paddingHorizontal: 10,
+  },
+  closeButton: {
+    color: '#fff',
+    padding: 5,
+    backgroundColor: '#dc3545',
+    alignSelf: 'flex-end',
+    borderRadius: 4,
+    paddingHorizontal: 8,
+  },
+
 });
 
 export default Profile;
