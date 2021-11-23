@@ -124,10 +124,35 @@ class Post extends Component {
                         {
                             this.state.showAlert ? 
                             <Modal visible={this.state.showAlert} animationType='slide' transparent={true}>
-                                <View style={styles.modalComentarios}> 
-                                    <Text> Are you sure you want to delete this post?</Text>
-                                    <TouchableOpacity onPress={() => this.deletePost()}>  <Text> YES </Text></TouchableOpacity>
-                                    <TouchableOpacity onPress={() => this.hideAlert()}>  <Text> NO </Text></TouchableOpacity>
+                                <View style={styles.modalBorrar}> 
+                                    <Text style={styles.mensajeBorrar}> Are you sure you want to delete this post?</Text>
+                                    <View style={styles.viewBorrar}>
+                                        <TouchableOpacity onPress={() => this.deletePost()} >  
+                                        <Image
+                                            style={
+                                                {
+                                                    height: 30,
+                                                    width: 30,
+                                                    marginRight: 10,
+                                                }
+                                            }
+                                            source={{ uri: "https://img.icons8.com/external-dreamstale-lineal-dreamstale/32/000000/external-confirm-interface-dreamstale-lineal-dreamstale.png"}}
+                                        />
+                                        </TouchableOpacity>
+                                        <TouchableOpacity onPress={() => this.hideAlert()} >  
+                                        <Image
+                                            style={
+                                                {
+                                                    height: 32,
+                                                    width: 32,
+                                                    marginLeft: 10,
+                                                }
+                                            }
+                                            source={{ uri: "https://img.icons8.com/ios/24/000000/cancel.png"}}
+                                        />
+                                        </TouchableOpacity>
+                                    </View>
+                                    
                                 </View>
                                 
 
@@ -391,6 +416,32 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderColor: '#FBB1BD'
     },
+    modalBorrar:{
+        backgroundColor: 'white',
+        width: '50%',
+        height: '12vh',
+        borderRadius: 6,
+        padding: 5,
+        borderColor: '#FBB1BD',
+        borderWidth: 1,
+        alignSelf: 'center',
+        boxShadow: 'grey 0px 0px 9px 7px',
+        marginTop: '50%',
+        marginBottom: '50%',
+    },
+    viewBorrar:{
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        alignSelf: 'center',
+        marginTop: 10
+    },
+    mensajeBorrar:{
+        fontSize: 20,
+        fontWeight: 'bold',
+        display: 'flex',
+        alignSelf: 'center',
+    }
 
 })
 
