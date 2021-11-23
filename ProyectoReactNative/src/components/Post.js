@@ -11,6 +11,7 @@ class Post extends Component {
             likes: 0,
             myLike: false,
             showModal: false,
+            showAlert: false, 
             comment: '',
         }
     }
@@ -89,6 +90,20 @@ class Post extends Component {
         
     }
 
+    // ALERTAS
+
+    showAlert(){
+        this.setState({
+            showAlert: true,
+        })
+    }
+
+    hideAlert(){
+        this.setState({
+            showAlert: false,
+        })
+    }
+
     //RENDER 
     render() {
         return (
@@ -98,12 +113,28 @@ class Post extends Component {
                     {/* DELETE POST */}
                     {
                         this.props.postData.data.owner == auth.currentUser.email ?
-                            <TouchableOpacity onPress={() => this.deletePost()} style={styles.botonDeletePost}>
+                        <TouchableOpacity onPress={() => this.showAlert()} style={styles.botonDeletePost}>
                                 <Text style={styles.textBoton}>DELETE</Text>
-                            </TouchableOpacity> :
+                        </TouchableOpacity>
+                    
+                            :
+
                             <Text></Text>
                     }
+                        {
+                            this.state.showAlert ? 
+                            <Modal visible={this.state.showAlert} animationType='slide' transparent={true}>
+                                <View style={styles.modalComentarios}> 
+                                    <Text> Are you sure you want to delete this post?</Text>
+                                    <TouchableOpacity onPress={() => this.deletePost()}>  <Text> YES </Text></TouchableOpacity>
+                                    <TouchableOpacity onPress={() => this.hideAlert()}>  <Text> NO </Text></TouchableOpacity>
+                                </View>
+                                
 
+                            </Modal> :
+                            <Text></Text>
+                        }
+                        
                     <Text style={styles.infoUser}> @{this.props.postData.data.name} </Text>
 
                     {/* IMAGEN */}
@@ -158,11 +189,9 @@ class Post extends Component {
                                                 }
                                             }
                                             source={{ uri: "https://img.icons8.com/ios-glyphs/30/fa314a/like--v1.png" }}
-
                                         />
                                     </TouchableOpacity>
                             }
-                            {/* poner el like/dislike al lado del corazon con flex direction column  */}
                         </View>
 
 
