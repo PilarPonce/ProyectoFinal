@@ -172,7 +172,6 @@ class Post extends Component {
 
                         {/* COMENTARIOS */}
                         <View>
-
                             {this.props.postData.data.comments === undefined ?
                                 <Text style={styles.infoPost}> 0 comments</Text>
                                 :
@@ -182,13 +181,12 @@ class Post extends Component {
                             <TouchableOpacity onPress={() => this.showModal()}>
                                 <Text style={styles.showComments} >Show Comments</Text>
                             </TouchableOpacity>
-
                         </View>
                     </View>
 
                     {/* MODAL PARA COMENTARIOS */}
                     {this.state.showModal ?
-                        <Modal style={styles.modalContainer} visible={this.state.showModal} animationType='slide' transparent={true}>
+                        <Modal visible={this.state.showModal} animationType='slide' transparent={true}>
                             <View style={styles.modalComentarios}>
                                 <TouchableOpacity style={styles.closeButton} onPress={() => this.hideModal()}>
                                     <Text>X</Text>

@@ -84,9 +84,9 @@ class Profile extends Component {
           </View>
         </Modal>
 
-        { this.state.posteos === 0 ?
-          <Text style={styles.tituloPosts}>All your posts:</Text> : 
-          <Text style= {styles.anyPost}> You don´t have any posts yet! Go make the first one</Text> 
+        { this.state.posteos.length === 0 ?
+          <Text style= {styles.anyPost}> You don´t have any posts yet! Go make the first one</Text>:
+          <Text style={styles.tituloPosts}>All your posts:</Text>  
         }
 
         {/* <Text style={styles.tituloPosts}>All your posts:</Text> */}
@@ -112,14 +112,11 @@ class Profile extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    //marginTop: 20,
-    //marginHorizontal: 10,
     backgroundColor: 'white',
     height: '100%'
   },
   userContainer: {
     display: 'flex',
-    flexDirection: 'column'
 
   },
   user: {
@@ -136,8 +133,6 @@ const styles = StyleSheet.create({
   },
   userInformation: {
     fontSize: 15,
-    marginHorizontal: 10,
-    marginBottom: 10,
     color: 'grey', 
   },
 
