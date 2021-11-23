@@ -112,55 +112,55 @@ class Post extends Component {
 
                     {/* DELETE POST */}
                     {
-                        this.props.postData.data.owner == auth.currentUser.email ?
-                        <TouchableOpacity onPress={() => this.showAlert()} style={styles.botonDeletePost}>
-                                <Text style={styles.textBoton}>DELETE</Text>
-                        </TouchableOpacity>
-                    
-                            :
-
-                            <Text></Text>
-                    }
-                        {
-                            this.state.showAlert ? 
-                            <Modal visible={this.state.showAlert} animationType='slide' transparent={true}>
-                                <View style={styles.modalBorrar}> 
-                                    <Text style={styles.mensajeBorrar}> Are you sure you want to delete this post?</Text>
-                                    <View style={styles.viewBorrar}>
-                                        <TouchableOpacity onPress={() => this.deletePost()} >  
-                                        <Image
-                                            style={
-                                                {
-                                                    height: 30,
-                                                    width: 30,
-                                                    marginRight: 10,
-                                                }
+                        this.state.showAlert ? 
+                        <Modal visible={this.state.showAlert} animationType='slide' transparent={true}>
+                            <View style={styles.modalBorrar}> 
+                                <Text style={styles.mensajeBorrar}> Are you sure you want to delete this post?</Text>
+                                <View style={styles.viewBorrar}>
+                                    <TouchableOpacity onPress={() => this.deletePost()} >  
+                                    <Image
+                                        style={
+                                            {
+                                                height: 30,
+                                                width: 30,
+                                                marginRight: 10,
                                             }
-                                            source={{ uri: "https://img.icons8.com/external-dreamstale-lineal-dreamstale/32/000000/external-confirm-interface-dreamstale-lineal-dreamstale.png"}}
-                                        />
-                                        </TouchableOpacity>
-                                        <TouchableOpacity onPress={() => this.hideAlert()} >  
-                                        <Image
-                                            style={
-                                                {
-                                                    height: 32,
-                                                    width: 32,
-                                                    marginLeft: 10,
-                                                }
+                                        }
+                                        source={{ uri: "https://img.icons8.com/external-dreamstale-lineal-dreamstale/32/000000/external-confirm-interface-dreamstale-lineal-dreamstale.png"}}
+                                    />
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => this.hideAlert()} >  
+                                    <Image
+                                        style={
+                                            {
+                                                height: 32,
+                                                width: 32,
+                                                marginLeft: 10,
                                             }
-                                            source={{ uri: "https://img.icons8.com/ios/24/000000/cancel.png"}}
-                                        />
-                                        </TouchableOpacity>
-                                    </View>
-                                    
+                                        }
+                                        source={{ uri: "https://img.icons8.com/ios/24/000000/cancel.png"}}
+                                    />
+                                    </TouchableOpacity>
                                 </View>
                                 
+                            </View>
+                            
 
-                            </Modal> :
-                            <Text></Text>
+                        </Modal> :
+                        <Text></Text>
+                    }
+                    <View style={styles.viewArriba}>
+                        <Text style={styles.infoUser}> @{this.props.postData.data.name} </Text>
+                        {
+                            this.props.postData.data.owner == auth.currentUser.email ?
+                            <TouchableOpacity onPress={() => this.showAlert()} style={styles.botonDeletePost}>
+                                    <Text style={styles.textBoton}>DELETE</Text>
+                            </TouchableOpacity>              
+                                :
+                                <Text></Text>
                         }
-                        
-                    <Text style={styles.infoUser}> @{this.props.postData.data.name} </Text>
+                    </View>  
+                    
 
                     {/* IMAGEN */}
                     <Image
@@ -302,14 +302,14 @@ const styles = StyleSheet.create({
     },
     contanier: {
         marginBottom: 20,
-        borderRadius: 4,
+        borderRadius: 12,
         borderColor: "#ccc",
         borderWidth: 1,
         padding: 10,
         width: '100%',
-        height: '100%',
         backgroundColor: 'white',
         paddingBottom: '5%',
+        marginVertical: 10,
         
     },
     disabled: {
@@ -324,10 +324,17 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         marginTop: 15,
     },
+    viewArriba:{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        height: 60,
+    },
     infoUser: {
         color: 'black',
-        marginBottom: 20,
+        marginBottom: 15,
         fontSize: 20,
+        marginTop: 10
 
     },
     likes: {
@@ -381,7 +388,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: 'black',
-        marginBottom: 5,
+        marginBottom: 18,
         display: 'flex',
         alignSelf: 'flex-end'
     },
