@@ -169,8 +169,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     padding: 10,
     width: '50%',
-    marginTop: '55%',
-    marginBottom: '10%'
+    marginTop: 20,
+    marginBottom: 20
   },
   botonLogout: {
     fontWeight: 'bold',
