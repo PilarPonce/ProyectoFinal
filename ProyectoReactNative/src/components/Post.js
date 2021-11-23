@@ -412,13 +412,15 @@ const styles = StyleSheet.create({
 
     },
     modalComentarios: {
-        backgroundColor: '#FAE0E4',
+        backgroundColor: 'white',
         width: '90%',
         height: '40vh',
         borderRadius: 4,
+        borderWidth: 1,
+        borderColor: '#FAE0E4',
         padding: 5,
         alignSelf: 'center',
-        boxShadow: 'rgb(204 204 204) 0px 0px 9px 7px',
+        boxShadow: 'grey 0px 0px 9px 7px',
         marginTop: '50%',
         marginBottom: 200,
     },
