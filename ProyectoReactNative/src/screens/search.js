@@ -11,6 +11,7 @@ class Search extends Component{
           textoBuscador: '',
           // posteos: null,
           posteos: [],
+          buscado: false,
 
         }
       }
@@ -31,6 +32,7 @@ class Search extends Component{
       
               this.setState({
                 posteos: posts,
+                buscado: true,
               })
             }
           )
@@ -51,23 +53,23 @@ class Search extends Component{
                         />
 
                     {/* BOTON SEARCH */}
-                    <TouchableOpacity style={styles.button} onPress={()=>this.search()} style={styles.botonSearch}>
+                    <TouchableOpacity onPress={()=>this.search()} style={styles.botonSearch}>
                             <Text style={styles.textButton}>Search</Text>    
                     </TouchableOpacity>
 
                     {/* PARA VER SI HAY RESULTADOS DE BUSQUEDA */}
 
 
-                    {this.state.posteos === null ?
-                      this.state.posteos.lenght === 0 ? 
-                        <Text>No results</Text> : 
+                    {this.state.posteos.length === 0 && this.state.buscado === true ?
+                      
+                        <Text  style={styles.noResults}>No results! Try again!</Text> : 
                          
                         <FlatList
                           data={this.state.posteos}
                           keyExtractor={post => post.id}
                           renderItem={({ item }) => <Post postData={item} />}
-                        /> : 
-                        <Text> </Text>
+                        />  
+                        
                     }  
 
               </View>
@@ -79,7 +81,7 @@ class Search extends Component{
 const styles = StyleSheet.create({
     botonSearch: {
       width: '100%',
-      height: '20%',
+      height: 35,
       backgroundColor: '#FAE0E4',
       textAlign: 'center',
       padding: 5,
@@ -88,6 +90,7 @@ const styles = StyleSheet.create({
       borderStyle: 'solid',
       borderColor: 'black',
       marginTop: 15,
+      marginBottom: 15
     },
     formContainer:{
         paddingHorizontal:10,
@@ -117,6 +120,12 @@ const styles = StyleSheet.create({
     },
     textButton:{
         color: 'black'
+    },
+    noResults:{
+      display: 'flex',
+      alignSelf: 'center',
+      fontSize: 20,
+      fontWeight: 'bold'
     }
 
 })
