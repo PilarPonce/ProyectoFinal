@@ -179,64 +179,98 @@ class Post extends Component {
                     {/* INFO POSTEO */}
                     <View style={styles.infoContainer}>
 
-                        {/* LIKES */}
-                        <View style={styles.likes}>
-                            <Text style={styles.infoPostLike}> {this.state.likes} like  </Text>
-                            {
-                                this.state.myLike == false ?
-                                    <TouchableOpacity onPress={() => this.darLike()}>
-                                        {/* <Text>Like</Text> */}
+                        <View style={styles.likesycomments}>
+                            {/* LIKES */}
+                            <View style={styles.likes}>
+                                
+                                {
+                                    this.state.myLike == false ?
+                                        <TouchableOpacity onPress={() => this.darLike()}>
+                                            {/* <Text>Like</Text> */}
 
-                                        <Image
+                                            <Image
+                                                style={
+                                                    {
+                                                        height: 22,
+                                                        width: 22,
+                                                        alignSelf: 'left',
+                                                        marginBottom: 10,
+                                                        //marginTop: 3,
+                                                        marginLeft: 5
+                                                    }
+                                                }
+                                                source={{ uri: "https://img.icons8.com/small/16/000000/like.png" }}
+
+                                            />
+                                        </TouchableOpacity> :
+
+                                        <TouchableOpacity onPress={() => this.quitarLike()}>
+                                            <Image
+                                                style={
+                                                    {
+                                                        height: 22,
+                                                        width: 22,
+                                                        alignSelf: 'left',
+                                                        marginBottom: 10,
+                                                        //marginTop: 3,
+                                                        marginLeft: 5
+                                                    }
+                                                }
+                                                source={{ uri: "https://img.icons8.com/ios-glyphs/30/fa314a/like--v1.png" }}
+                                            />
+                                        </TouchableOpacity>
+                                }
+                                <Text style={styles.infoPostLike}> {this.state.likes} </Text>
+                            </View>
+                            {/* COMENTARIOS */}
+                            <View>
+                                {this.props.postData.data.comments === undefined ?
+                                    <View  style={styles.comments}>
+                                    <Image
                                             style={
                                                 {
-                                                    height: 18,
-                                                    width: 18,
+                                                    height: 22,
+                                                    width: 22,
                                                     alignSelf: 'left',
                                                     marginBottom: 10,
-                                                    marginTop: 10,
+                                                    //marginTop: 3,
+                                                    marginLeft: 5
                                                 }
                                             }
-                                            source={{ uri: "https://img.icons8.com/small/16/000000/like.png" }}
-
+                                            source={{ uri: "https://img.icons8.com/material-outlined/24/000000/filled-topic.png" }}
                                         />
-                                    </TouchableOpacity> :
-
-                                    <TouchableOpacity onPress={() => this.quitarLike()}>
+                                        <Text style={styles.infoPostComment}>0 </Text>
+                                    </View>
+                                    :
+                                    <View  style={styles.comments}>
                                         <Image
-                                            style={
-                                                {
-                                                    height: 18,
-                                                    width: 18,
-                                                    alignSelf: 'left',
-                                                    marginBottom: 10,
-                                                    marginTop: 10,
+                                                style={
+                                                    {
+                                                        height: 22,
+                                                        width: 22,
+                                                        alignSelf: 'left',
+                                                        marginBottom: 10,
+                                                        //marginTop: 3,
+                                                        marginLeft: 5
+                                                    }
                                                 }
-                                            }
-                                            source={{ uri: "https://img.icons8.com/ios-glyphs/30/fa314a/like--v1.png" }}
-                                        />
-                                    </TouchableOpacity>
-                            }
+                                                source={{ uri: "https://img.icons8.com/material-outlined/24/000000/filled-topic.png" }}
+                                            />
+                                        <Text style={styles.infoPostComment}>{this.props.postData.data.comments.length} </Text>
+                                    </View>
+                                    
+                                }
+                            </View>
                         </View>
 
-
-
-
+                        
                         {/* DESCRIPCION */}
                         <Text style={styles.infoPost}>@{this.props.postData.data.name}: {this.props.postData.data.texto}</Text>
-
-                        {/* COMENTARIOS */}
-                        <View>
-                            {this.props.postData.data.comments === undefined ?
-                                <Text style={styles.infoPost}> 0 comments</Text>
-                                :
-                                <Text style={styles.infoPost}>Comments: {this.props.postData.data.comments.length} </Text>
-                            }
-
-                            <TouchableOpacity onPress={() => this.showModal()}>
+                        <TouchableOpacity onPress={() => this.showModal()}>
                                 <Text style={styles.showComments} >Show Comments</Text>
-                            </TouchableOpacity>
-                        </View>
+                        </TouchableOpacity>
+
+                        
                     </View>
 
                     {/* MODAL PARA COMENTARIOS */}
@@ -339,8 +373,21 @@ const styles = StyleSheet.create({
     },
     likes: {
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: 'row',
+        marginRight: 15,
+        marginLeft: 5
+        //marginTop: 5
 
+    },
+    comments: {
+        display: 'flex',
+        flexDirection: 'row',
+        //marginTop: 5
+
+    },
+    likesycomments:{
+        display: 'flex',
+        flexDirection: 'row'
     },
 
     infoContainer: {
@@ -351,6 +398,11 @@ const styles = StyleSheet.create({
     infoPostLike: {
         fontSize: 16,
         color: 'black',
+    },
+    infoPostComment: {
+        fontSize: 16,
+        color: 'black',
+        marginLeft: 3
     },
 
     infoPost: {
