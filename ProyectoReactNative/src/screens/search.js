@@ -58,11 +58,12 @@ class Search extends Component{
                     </TouchableOpacity>
 
                     {/* PARA VER SI HAY RESULTADOS DE BUSQUEDA */}
-
-
                     {this.state.posteos.length === 0 && this.state.buscado === true ?
-                      
-                        <Text  style={styles.noResults}>No results! Try again!</Text> : 
+                
+                    <View> 
+                      <Text style={styles.noResults}> Sorry, no results! </Text>
+                      <Text style={styles.noResults}> The user does not exist or does not have any publications yet </Text>
+                    </View>: 
                          
                         <FlatList
                           data={this.state.posteos}

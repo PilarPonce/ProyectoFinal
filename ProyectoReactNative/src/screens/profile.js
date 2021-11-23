@@ -89,8 +89,6 @@ class Profile extends Component {
           <Text style={styles.tituloPosts}>All your posts:</Text>  
         }
 
-        {/* <Text style={styles.tituloPosts}>All your posts:</Text> */}
-
         {/* POSTS DEL USUARIO */}
         <View style={styles.containerPost}>
 
@@ -158,7 +156,7 @@ const styles = StyleSheet.create({
   },
   
   tituloPosts: {
-    fontSize: 15,
+    fontSize: 19,
     marginLeft: 10,
     marginBottom: 10
   },

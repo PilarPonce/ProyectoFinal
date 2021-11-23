@@ -86,6 +86,7 @@ class Post extends Component {
     //DELETE POST
     deletePost() {
         db.collection('posts').doc(this.props.postData.id).delete()
+        
     }
 
     //RENDER 
