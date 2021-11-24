@@ -42,7 +42,7 @@ class Login extends Component{
                 <Text>I'm disabled</Text>
                 </TouchableOpacity>
                 }
-                <TouchableOpacity onPress={() => this.props.drawerProps.navigation.navigate('Register')}><Text >Don´t have an account? Sign up </Text> </TouchableOpacity>
+                <TouchableOpacity onPress={() => this.props.drawerProps.navigation.navigate('Register')}><Text >Don´t have an account? Tap here to sign up </Text> </TouchableOpacity>
 
                 <Text style={styles.mensajeError}> {this.props.errorLogin} </Text>
             </View>
