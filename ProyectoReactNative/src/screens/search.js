@@ -16,6 +16,26 @@ class Search extends Component{
         }
       }
 
+      componentDidMount(){
+        db.collection('posts').orderBy('createdAt', 'desc').onSnapshot(
+          docs => {
+            let posts = [];
+            docs.forEach( doc => {
+              posts.push({
+                id: doc.id,   
+                data: doc.data(),
+              })
+            })
+            console.log(posts);
+    
+            this.setState({
+              posteos: posts,
+            })
+          }
+        )
+      }
+          
+
 //SEARCH
       search(){
         db.collection('posts').where('owner', '==', this.state.textoBuscador).onSnapshot(
@@ -57,13 +77,21 @@ class Search extends Component{
                             <Text style={styles.textButton}>Search</Text>    
                     </TouchableOpacity>
 
+                
+
                     {/* PARA VER SI HAY RESULTADOS DE BUSQUEDA */}
                     {this.state.posteos.length === 0 && this.state.buscado === true ?
                 
                     <View> 
                       <Text style={styles.noResults}> Sorry, no results! </Text>
                       <Text style={styles.noResults}> The user does not exist or does not have any publications yet </Text>
-                    </View>: 
+                      <FlatList 
+                      data= { this.state.posteos }
+                      keyExtractor = { post => post.id}
+                      renderItem = { ({item}) => <Post postData={item} />} 
+                    />
+                    </View>
+                    : 
                          
                         <FlatList
                           data={this.state.posteos}
