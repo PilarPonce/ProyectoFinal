@@ -57,13 +57,10 @@ class Profile extends Component {
       <View style={styles.container}>
         
         <View style= {styles.userContainer}>
-          
-
+          <Text style={styles.user}>  @{this.props.userData.displayName}</Text>
           <TouchableOpacity onPress={() => this.showModal()} style={styles.info}>
             <Text style={styles.userInformation}> Tap here to see more user information </Text>
           </TouchableOpacity>
-
-          <Text style={styles.user}>  @{this.props.userData.displayName}</Text>
         </View>
        
 
@@ -115,7 +112,8 @@ const styles = StyleSheet.create({
   },
   userContainer: {
     display: 'flex',
-
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   user: {
     fontSize: 20,
@@ -135,10 +133,8 @@ const styles = StyleSheet.create({
   },
 
   info: {
-    marginLeft: '60%', 
-    marginTop: '1%',
-    
-    
+    marginTop: 25,
+    marginRight: 10
   },
   modalInformation: {
     backgroundColor: '#FAE0E4',
@@ -148,9 +144,8 @@ const styles = StyleSheet.create({
     padding: 5,
     alignSelf: 'center',
     boxShadow: 'rgb(204 204 204) 0px 0px 9px 7px',
-    marginTop: 200,
-    marginBottom: 200,
-},
+    marginTop: '50%',
+  },
   anyPost: {
     marginTop: '1%', 
     marginLeft: '1%'

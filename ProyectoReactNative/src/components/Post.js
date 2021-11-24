@@ -285,7 +285,7 @@ class Post extends Component {
 
                                     <View>
                                         {this.props.postData.data.name ?
-                                            <Text  style={styles.tituloComentarios}>Comments of @{this.props.postData.data.name}'s post</Text>:
+                                            <Text  style={styles.tituloComentarios}>Comments on @{this.props.postData.data.name}'s post</Text>:
                                             <Text style={styles.tituloComentarios}>Comments</Text>
                                         }
                                         <FlatList
@@ -401,14 +401,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginRight: 15,
         marginLeft: 5
-        //marginTop: 5
-
     },
     comments: {
         display: 'flex',
         flexDirection: 'row',
-        //marginTop: 5
-
     },
     likesycomments:{
         display: 'flex',
@@ -418,8 +414,6 @@ const styles = StyleSheet.create({
     infoContainer: {
         backgroundColor: 'white',
         height: 90,
-        
-
     },
 
     infoPostLike: {
@@ -448,8 +442,7 @@ const styles = StyleSheet.create({
         padding: 5,
         alignSelf: 'center',
         boxShadow: 'grey 0px 0px 9px 7px',
-        marginTop: 150,
-        marginBottom: 200,
+        marginTop: '50%',
     },
     showComments: {
         backgroundColor: '#FAE0E4',
