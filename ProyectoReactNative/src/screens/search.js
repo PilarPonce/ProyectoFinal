@@ -137,12 +137,21 @@ class Search extends Component{
                           {
                             height: 30,
                             width: 30,
-                            marginRight: 10,
+                            marginLeft: 20,
                           }
                         }
-                          source={{ uri: src="https://img.icons8.com/ios/50/000000/alphabetical-sorting--v1.png" }}
+                          source={{ uri: "https://img.icons8.com/ios/50/000000/alphabetical-sorting--v1.png" }}
                       /></TouchableOpacity> :
-                      <TouchableOpacity onPress={() => this.ordenDescendente()}> <Text> ORDEN DESCENDENTE </Text></TouchableOpacity>
+                      <TouchableOpacity onPress={() => this.ordenDescendente()}> <Image
+                        style={
+                          {
+                            height: 30,
+                            width: 30,
+                            marginLeft: 20,
+                          }
+                        }
+                        source={{ uri: "https://img.icons8.com/ios/50/000000/alphabetical-sorting-2--v1.png" }}
+                      /></TouchableOpacity>
                   }
                         <FlatList
                           data={this.state.posteos}
