@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
         height: '95%'
     },
     input:{
-        height:80,
+        height:40,
         paddingVertical:15,
         paddingHorizontal: 10,
         borderWidth:1,
