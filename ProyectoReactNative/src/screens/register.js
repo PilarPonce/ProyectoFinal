@@ -14,8 +14,9 @@ class Register extends Component {
 
     render() {
         return (
-            <React.Fragment style= {{backgroundColor: 'white'}}>
-                <View>
+            <React.Fragment >
+                <View style={styles.todo}>
+                    
                     <Image 
                         style={{height: 300,
                                 width: '100%',
@@ -26,48 +27,54 @@ class Register extends Component {
                         source= {require('../../assets/logo.jpg')}
                         resizeMode= 'contain'
                     />
+
+                    <View style={styles.registerContainer}>
+                        <TextInput
+                            style={styles.input}
+                            onChangeText={(text) => this.setState({ email: text })}
+                            placeholder='email'
+                            keyboardType='email-address' />
+                        <TextInput
+                            style={styles.input}
+                            onChangeText={(text) => this.setState({ userName: text })}
+                            placeholder='user name'
+                            keyboardType='default' />
+                        <TextInput
+                            style={styles.input}
+                            onChangeText={(text) => this.setState({ password: text })}
+                            placeholder='password'
+                            keyboardType='email-address'
+                            secureTextEntry={true}
+                        />
+
+                        {this.state.email && this.state.userName && this.state.password ?
+                            <TouchableOpacity style={styles.button} onPress={() => this.props.register(this.state.email, this.state.password, this.state.userName)} >
+                                <Text style={styles.textButton}>Register</Text>
+                            </TouchableOpacity> :
+                            <TouchableOpacity style={styles.buttonDisabled} disabled={true} >
+                                <Text>I'm disabled</Text>
+                            </TouchableOpacity>
+                        }
+                        <TouchableOpacity onPress={() => this.props.drawerProps.navigation.navigate('Login')} style={styles.redireccion}> <Text> You already have an account? Tap here to login</Text> </TouchableOpacity>
+                        
+                        <Text style={styles.mensajeError}> {this.props.errorRegister} </Text>
+                    </View> 
                 </View>
-
-                <View style={styles.registerContainer}>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={(text) => this.setState({ email: text })}
-                        placeholder='email'
-                        keyboardType='email-address' />
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={(text) => this.setState({ userName: text })}
-                        placeholder='user name'
-                        keyboardType='default' />
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={(text) => this.setState({ password: text })}
-                        placeholder='password'
-                        keyboardType='email-address'
-                        secureTextEntry={true}
-                    />
-
-                    {this.state.email && this.state.userName && this.state.password ?
-                        <TouchableOpacity style={styles.button} onPress={() => this.props.register(this.state.email, this.state.password, this.state.userName)} >
-                            <Text style={styles.textButton}>Register</Text>
-                        </TouchableOpacity> :
-                        <TouchableOpacity style={styles.buttonDisabled} disabled={true} >
-                            <Text>I'm disabled</Text>
-                        </TouchableOpacity>
-                    }
-                    <TouchableOpacity onPress={() => this.props.drawerProps.navigation.navigate('Login')} style={styles.redireccion}> <Text> You already have an account? Tap here to login</Text> </TouchableOpacity>
-                     
-                    <Text style={styles.mensajeError}> {this.props.errorRegister} </Text>
-                </View> 
                 </React.Fragment>
-            
         )
     }
 }
 
 const styles = StyleSheet.create({
-    body: {
-        backgroundColor: 'white'
+    todo: {
+        backgroundColor: 'white',
+        height: '100%'
+    },
+    redireccion:{
+        display: 'flex',
+        alignSelf: 'center',
+        fontSize: 20,
+        marginTop: 10,
     },
     registerContainer: {
         paddingHorizontal: 10,
@@ -83,6 +90,9 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderRadius: 6,
         marginVertical: 10,
+        width: '95%',
+        display: 'flex',
+        alignSelf: 'center'
     },
     button: {
         backgroundColor: '#FF7096',
@@ -92,7 +102,10 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         borderWidth: 1,
         borderStyle: 'solid',
-        borderColor: '#FF7096'
+        borderColor: '#FF7096',
+        width: '95%',
+        display: 'flex',
+        alignSelf: 'center'
     },
     buttonDisabled: {
         backgroundColor: '#FBB1BD',
@@ -102,7 +115,10 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         borderWidth: 1,
         borderStyle: 'solid',
-        borderColor: '#FBB1BD'
+        borderColor: '#FBB1BD',
+        width: '95%',
+        display: 'flex',
+        alignSelf: 'center'
     },
     textButton: {
         color: 'black'
