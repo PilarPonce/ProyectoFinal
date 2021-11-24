@@ -53,7 +53,7 @@ class Post extends Component {
             })
     }
 
-    //COMENTARIOS:
+    //COMENTARIOS
     showModal() {
         this.setState({
             showModal: true,

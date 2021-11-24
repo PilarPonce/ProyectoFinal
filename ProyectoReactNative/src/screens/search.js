@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {View, Text, TextInput, StyleSheet, TouchableOpacity, Image, FlatList} from 'react-native';
+import {View, Text, TextInput, StyleSheet, TouchableOpacity, Image, FlatList, ActivityIndicator} from 'react-native';
 import { db } from '../firebase/config';
 import Post from '../components/Post';
 
@@ -10,14 +10,16 @@ class Search extends Component{
           textoBuscador: '',
           posteos: [],
           buscado: false,
-
+          cargado: '',
+          ordenAsc: true, 
+          filtro: 'desc', 
         }
       }
 
 
 //SEARCH
       search(){
-        db.collection('posts').where('owner', '==', this.state.textoBuscador).onSnapshot(
+        db.collection('posts').where('owner', '==', this.state.textoBuscador, this.state.filtro).onSnapshot(
             docs => {
               console.log(docs);
               let posts = [];
@@ -27,19 +29,73 @@ class Search extends Component{
                   data: doc.data(),
                 })
               })
-              console.log(posts);
-      
+              
               this.setState({
                 posteos: posts,
                 buscado: true,
+                ordenAsc: true, 
+                cargando: true,
               })
             }
           )
       }
 
+      ordenAscendente (){
+        this.setState({
+          filtro: 'asc',
+          ordenAsc: false,
+        })
+        db.collection('posts').where('owner', '==', this.state.textoBuscador).orderBy('createdAt', 'asc').onSnapshot(
+          docs => {
+            console.log(docs);
+            let posts = [];
+            docs.forEach(doc => {
+              posts.push({
+                id: doc.id,
+                data: doc.data(),
+              })
+            })
+        
+            this.setState({
+              posteos: posts,
+              buscado: true,
+              cargando: true, 
+
+            })
+          }
+        )
+      }
+
+  ordenDescendente() {
+    this.setState({
+      filtro: 'desc',
+      ordenAsc: true,
+    })
+    db.collection('posts').where('owner', '==', this.state.textoBuscador).orderBy('createdAt', 'desc').onSnapshot(
+      docs => {
+        console.log(docs);
+        let posts = [];
+        docs.forEach(doc => {
+          posts.push({
+            id: doc.id,
+            data: doc.data(),
+          })
+        })
+
+        this.setState({
+          posteos: posts,
+          buscado: true,
+          cargando: true,
+
+        })
+      }
+    )
+  }
+
+
 // RENDER 
       render(){
-          console.log(this.state.posteos);
+          
           return(
               <View style={styles.todo}>
 
@@ -56,7 +112,12 @@ class Search extends Component{
                             <Text style={styles.textButton}>Search</Text>    
                     </TouchableOpacity>
 
-                
+                  {
+                    this.state.cargado === false ?
+                    <ActivityIndicator> </ActivityIndicator> : 
+                    <Text> </Text>
+                  }
+
 
                     {/* PARA VER SI HAY RESULTADOS DE BUSQUEDA */}
                     {this.state.posteos.length === 0 && this.state.buscado === true ?
@@ -67,12 +128,20 @@ class Search extends Component{
                       
                     </View>
                     : 
-                         
+                    <React.Fragment> 
+                  {
+                    this.state.ordenAsc === true ?
+                      <TouchableOpacity onPress={() => this.ordenAscendente()}> <Text> ORDEN ASCENDENTE  </Text></TouchableOpacity> :
+                      <TouchableOpacity onPress={() => this.ordenDescendente()}> <Text> ORDEN DESCENDENTE </Text></TouchableOpacity>
+                  }
                         <FlatList
                           data={this.state.posteos}
                           keyExtractor={post => post.id}
                           renderItem={({ item }) => <Post postData={item} />}
-                        />  
+                        />
+                    </React.Fragment>
+                         
+                        
                         
                     }  
 
