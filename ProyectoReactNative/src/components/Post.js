@@ -147,7 +147,10 @@ class Post extends Component {
 
                     {/* NOMBRE DE USUARIO Y BOTON DELETE POST */}
                     <View style={styles.viewArriba}>
-                        <Text style={styles.infoUser}> @{this.props.postData.data.name} </Text>
+                        {this.props.postData.data.name ?
+                            <Text  style={styles.infoUser}>@{this.props.postData.data.name}</Text>:
+                            <Text style={styles.infoUser}>{this.props.postData.data.owner}</Text>
+                        }
                         {
                             this.props.postData.data.owner == auth.currentUser.email ?
                             <TouchableOpacity onPress={() => this.showAlert()} style={styles.botonDeletePost}>
@@ -496,8 +499,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         alignSelf: 'center',
         boxShadow: 'grey 0px 0px 9px 7px',
-        marginTop: 200,
-        marginBottom: '50%',
+        marginTop: '50%',
     },
     viewBorrar:{
         display: 'flex',

@@ -56,7 +56,10 @@ class Profile extends Component {
       <View style={styles.container}>
         
         <View style= {styles.userContainer}>
-          <Text style={styles.user}>  @{this.props.userData.displayName}</Text>
+          {this.props.userData.displayName?
+            <Text style={styles.user}>  @{this.props.userData.displayName}</Text>:
+            <Text style={styles.user}>  {this.props.userData.email}</Text>        
+          }
           <TouchableOpacity onPress={() => this.showModal()} style={styles.info}>
             <Text style={styles.userInformation}> Tap here to see more user information </Text>
           </TouchableOpacity>
@@ -147,7 +150,10 @@ const styles = StyleSheet.create({
   },
   anyPost: {
     marginTop: '1%', 
-    marginLeft: '1%'
+    marginLeft: '1%',
+    fontSize: 20,
+    display: 'flex',
+    alignSelf: 'center'
   },
   
   tituloPosts: {
