@@ -48,6 +48,7 @@ class Home extends Component{
       paddingHorizontal:10,
       height: '100%', 
       width:'100%', 
+      
     },
 
   })
