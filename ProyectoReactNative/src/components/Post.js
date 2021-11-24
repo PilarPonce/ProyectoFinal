@@ -417,7 +417,7 @@ const styles = StyleSheet.create({
     modalComentarios: {
         backgroundColor: 'white',
         width: '90%',
-        height: '40vh',
+        height: '42vh',
         borderRadius: 4,
         borderWidth: 1,
         borderColor: '#FAE0E4',
