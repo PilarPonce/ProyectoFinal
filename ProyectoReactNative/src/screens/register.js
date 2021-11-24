@@ -55,7 +55,7 @@ class Register extends Component {
                             <Text>I'm disabled</Text>
                         </TouchableOpacity>
                     }
-                    <TouchableOpacity onPress={() => this.props.drawerProps.navigation.navigate('Login')}> <Text> You already have an account? Tap here to login</Text> </TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.props.drawerProps.navigation.navigate('Login')} style={styles.redireccion}> <Text> You already have an account? Tap here to login</Text> </TouchableOpacity>
                      
                     <Text style={styles.mensajeError}> {this.props.errorRegister} </Text>
                 </View> 

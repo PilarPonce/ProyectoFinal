@@ -8,32 +8,12 @@ class Search extends Component{
         super(props);
         this.state ={
           textoBuscador: '',
-          // posteos: null,
           posteos: [],
           buscado: false,
 
         }
       }
 
-      componentDidMount(){
-        db.collection('posts').orderBy('createdAt', 'desc').onSnapshot(
-          docs => {
-            let posts = [];
-            docs.forEach( doc => {
-              posts.push({
-                id: doc.id,   
-                data: doc.data(),
-              })
-            })
-            console.log(posts);
-    
-            this.setState({
-              posteos: posts,
-            })
-          }
-        )
-      }
-          
 
 //SEARCH
       search(){
@@ -84,11 +64,7 @@ class Search extends Component{
                     <View> 
                       <Text style={styles.noResults}> Sorry, no results! </Text>
                       <Text style={styles.noResults}> The user does not exist or does not have any publications yet </Text>
-                      <FlatList 
-                      data= { this.state.posteos }
-                      keyExtractor = { post => post.id}
-                      renderItem = { ({item}) => <Post postData={item} />} 
-                    />
+                      
                     </View>
                     : 
                          
