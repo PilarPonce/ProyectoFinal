@@ -25,7 +25,6 @@ class PostForm extends Component{
         .then( ()=>{ 
             this.setState({
                 textoPost:'',
-                url: '',
                 showCamera: true
             })
             this.props.drawerProps.navigation.navigate('Home')
