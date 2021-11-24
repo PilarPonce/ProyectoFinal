@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { db, auth } from '../firebase/config';
-import { Text, TouchableOpacity, View, StyleSheet, Image, ActivityIndicator, FlatList, TextInput, Modal } from 'react-native';
+import { Text, TouchableOpacity, View, StyleSheet, FlatList, Modal } from 'react-native';
 import Post from '../components/Post';
 
 class Profile extends Component {

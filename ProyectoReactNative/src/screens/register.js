@@ -54,11 +54,7 @@ class Register extends Component {
                             <Text>I'm disabled</Text>
                         </TouchableOpacity>
                     }
-
-                   
-                    <TouchableOpacity >   <Text >Don´t have an account? Sign up </Text> </TouchableOpacity>
                     
-
                     <Text style={styles.mensajeError}> {this.props.errorRegister} </Text>
                 </View> </React.Fragment>
             

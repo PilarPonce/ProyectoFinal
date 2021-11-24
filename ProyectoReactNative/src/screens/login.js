@@ -10,6 +10,10 @@ class Login extends Component{
         }
     }
 
+    redireccionar () {
+        this.props.drawerProps.navigation.navigate('Register')
+    }
+
     render(){
         console.log(this.props.login);
         return(
@@ -35,6 +39,7 @@ class Login extends Component{
                 <Text>I'm disabled</Text>
                 </TouchableOpacity>
                 }
+                <TouchableOpacity onPress= {()=> this.redireccionar()}><Text >Don´t have an account? Sign up </Text> </TouchableOpacity>
 
                 <Text style={styles.mensajeError}> {this.props.errorLogin} </Text>
             </View>

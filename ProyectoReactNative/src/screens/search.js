@@ -1,7 +1,6 @@
-import { NavigationRouteContext } from "@react-navigation/native";
 import React, {Component} from "react";
 import {View, Text, TextInput, StyleSheet, TouchableOpacity, Image, FlatList} from 'react-native';
-import { auth, db } from '../firebase/config';
+import { db } from '../firebase/config';
 import Post from '../components/Post';
 
 class Search extends Component{
