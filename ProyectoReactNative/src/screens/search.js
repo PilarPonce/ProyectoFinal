@@ -131,7 +131,17 @@ class Search extends Component{
                     <React.Fragment> 
                   {
                     this.state.ordenAsc === true ?
-                      <TouchableOpacity onPress={() => this.ordenAscendente()}> <Text> ORDEN ASCENDENTE  </Text></TouchableOpacity> :
+                      <TouchableOpacity onPress={() => this.ordenAscendente()}> 
+                      <Image
+                        style={
+                          {
+                            height: 30,
+                            width: 30,
+                            marginRight: 10,
+                          }
+                        }
+                          source={{ uri: src="https://img.icons8.com/ios/50/000000/alphabetical-sorting--v1.png" }}
+                      /></TouchableOpacity> :
                       <TouchableOpacity onPress={() => this.ordenDescendente()}> <Text> ORDEN DESCENDENTE </Text></TouchableOpacity>
                   }
                         <FlatList
