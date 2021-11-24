@@ -40,7 +40,7 @@ class Menu extends Component {
         })
     }
 
-    // REGISTER
+// REGISTER
     register(email, pass, userName) {
         auth.createUserWithEmailAndPassword(email, pass)
             .then(() => {
@@ -58,13 +58,12 @@ class Menu extends Component {
             })
     }
 
-
+//GUARDAR NOMBRE DE USUARIO
     saveName(userName){
         const user = firebase.auth().currentUser;
         if (user != null) {
             user.updateProfile({
                 displayName: userName,
-                //photoURL: photo,
             })
             .then(()=>{
                 console.log('username guardado')
@@ -76,20 +75,17 @@ class Menu extends Component {
         }
     }
 
-    // LOGIN
+// LOGIN
     login(email, pass){
         auth.signInWithEmailAndPassword(email, pass) 
             .then((response) =>{
-                
                 console.log(response);
                 this.setState({
                     logueado: true,
                     user: response.user,
                     errorLogin: '',
-                    
                 })
             })
-
             .catch(error => {
                 console.log(error)
                 this.setState({
@@ -98,7 +94,7 @@ class Menu extends Component {
             })
     }
 
-    // LOGOUT
+// LOGOUT
     logout(){
         auth.signOut()
             .then( (res)=>{
@@ -111,14 +107,14 @@ class Menu extends Component {
     }
 
      
-    // RENDER
+// RENDER
     render() {
         return (
             <NavigationContainer>
                 {this.state.logueado == false ?
                 <Drawer.Navigator>
-                        <Drawer.Screen name="Register" component={(drawerProps) => <Register drawerProps={drawerProps} register={(email, pass, userName) => this.register(email, pass, userName)} errorRegister= {this.state.errorRegister} />} />
-                        <Drawer.Screen name="Login" component={(drawerProps) => <Login drawerProps={drawerProps} login={(email, pass)=> this.login(email, pass)} errorLogin={this.state.errorLogin}/>}/>
+                    <Drawer.Screen name="Register" component={(drawerProps) => <Register drawerProps={drawerProps} register={(email, pass, userName) => this.register(email, pass, userName)} errorRegister= {this.state.errorRegister} />} />
+                    <Drawer.Screen name="Login" component={(drawerProps) => <Login drawerProps={drawerProps} login={(email, pass)=> this.login(email, pass)} errorLogin={this.state.errorLogin}/>}/>
                 </Drawer.Navigator>:
                 <Drawer.Navigator>
                     <Drawer.Screen name="Home" component={()=><Home />} />

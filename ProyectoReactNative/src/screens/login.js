@@ -10,10 +10,6 @@ class Login extends Component{
         }
     }
 
-    // redireccionar () {
-    //     this.props.drawerProps.navigation.navigate('Register')
-    // }
-
     render(){
         console.log(this.props.login);
         return(

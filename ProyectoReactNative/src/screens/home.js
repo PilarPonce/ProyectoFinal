@@ -11,6 +11,7 @@ class Home extends Component{
       }
     }
 
+//CARGADO DE POSTEOS
     componentDidMount(){
       db.collection('posts').orderBy('createdAt', 'desc').onSnapshot(
         docs => {

@@ -13,7 +13,7 @@ class MyCamera extends Component{
         }
     }
 
-
+//PERMISOS DE LA CAMARA
     componentDidMount() {
         Camera.requestCameraPermissionsAsync()
             .then(() => {
@@ -24,7 +24,7 @@ class MyCamera extends Component{
             .catch(error => console.log(error))
     }
 
-    //take picture
+//TOMAR UNA FOTO
     takePicture (){
         this.camera.takePictureAsync()
             .then((photo) => {
@@ -36,7 +36,7 @@ class MyCamera extends Component{
             .catch(error => console.log(error))
     }
 
-    //save photo
+//GUARDAR LA FOTO
     savePhoto(){
         fetch (this.state.photo)
         .then (res => res.blob())
@@ -57,7 +57,7 @@ class MyCamera extends Component{
             .catch(error => console.log(error))
     }
 
-    //vacio el estado
+//VACIO EL ESTADO
     clear() {
         this.setState({
             photo: '',
@@ -65,26 +65,24 @@ class MyCamera extends Component{
         })
     }
 
-    //render
+//RENDER
     render(){
         return(
             <View style= {styles.container}>
-
                 {this.state.permission ?
                     this.state.showCamera === true ?
-                     <View style= {styles.container}> 
+                        <View style= {styles.container}> 
+                            <Camera
+                                style={styles.cameraBody}
+                                type={Camera.Constants.Type.back}
+                                ref={reference => this.camera = reference}
+                            />
+                            
+                            <TouchableOpacity style={styles.botonPicture} onPress={() => this.takePicture()}>
+                                <Text style={styles.botonText}>TAKE PICTURE</Text>
+                            </TouchableOpacity>
 
-                                <Camera
-                                    style={styles.cameraBody}
-                                    type={Camera.Constants.Type.back}
-                                    ref={reference => this.camera = reference}
-                                />
-                                
-                                <TouchableOpacity style={styles.botonPicture} onPress={() => this.takePicture()}>
-                                    <Text style={styles.botonText}>TAKE PICTURE</Text>
-                                </TouchableOpacity>
-
-                            </View> : 
+                        </View> : 
                         <React.Fragment>
                             <Image
                                 style={styles.cameraBody}
@@ -101,7 +99,7 @@ class MyCamera extends Component{
                             </View>
 
                         </React.Fragment> : 
-                        <Text style= {styles.message}> YOU DON´T HAVE PERMISSION TO USE THE CAMERA </Text> 
+                    <Text style= {styles.message}> YOU DON´T HAVE PERMISSION TO USE THE CAMERA </Text> 
                 }
             </View>
         )
@@ -113,11 +111,9 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         height: '95%'
-
     },
     cameraBody: {
         flex: 6,
-        
     },
     button: {
         flex: 1,
@@ -131,7 +127,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         borderRadius: 4,
         borderWidth: 1,
-       
         borderColor: 'black',
         marginTop: 10, 
         width: '100%'
@@ -169,7 +164,6 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignSelf: 'center'
     }
-
 
 })
 

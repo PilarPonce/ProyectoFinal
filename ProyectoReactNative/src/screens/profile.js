@@ -14,7 +14,7 @@ class Profile extends Component {
   }
 
 
-//COMPONENT DID MOUNT
+//POSTEOS DEL USUARIO
   componentDidMount() {
     db.collection('posts').where('owner', '==', auth.currentUser.email).orderBy('createdAt', 'desc').onSnapshot(
       docs => {
@@ -36,7 +36,6 @@ class Profile extends Component {
   }
 
   //MODAL INFORMATION
-
   showModal() {
     this.setState({
       showModal: true,
@@ -50,7 +49,7 @@ class Profile extends Component {
   }
 
 
-  // /RENDER 
+  //RENDER 
   render() {
     console.log(this.state.posteos);
     return (

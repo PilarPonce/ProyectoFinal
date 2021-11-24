@@ -90,8 +90,7 @@ class Post extends Component {
         
     }
 
-    // ALERTAS
-
+    // ALERTAS DELETE POST
     showAlert(){
         this.setState({
             showAlert: true,
@@ -110,45 +109,43 @@ class Post extends Component {
             <View style={styles.body}>
                 <View style={styles.contanier}>
 
-                    {/* DELETE POST */}
-                    {
-                        this.state.showAlert ? 
+                    {/* MODAL DELETE POST */}
+                    {this.state.showAlert ? 
                         <Modal visible={this.state.showAlert} animationType='slide' transparent={true}>
                             <View style={styles.modalBorrar}> 
                                 <Text style={styles.mensajeBorrar}> Are you sure you want to delete this post?</Text>
                                 <View style={styles.viewBorrar}>
                                     <TouchableOpacity onPress={() => this.deletePost()} >  
-                                    <Image
-                                        style={
-                                            {
-                                                height: 30,
-                                                width: 30,
-                                                marginRight: 10,
+                                        <Image
+                                            style={
+                                                {
+                                                    height: 30,
+                                                    width: 30,
+                                                    marginRight: 10,
+                                                }
                                             }
-                                        }
-                                        source={{ uri: "https://img.icons8.com/external-dreamstale-lineal-dreamstale/32/000000/external-confirm-interface-dreamstale-lineal-dreamstale.png"}}
-                                    />
+                                            source={{ uri: "https://img.icons8.com/external-dreamstale-lineal-dreamstale/32/000000/external-confirm-interface-dreamstale-lineal-dreamstale.png"}}
+                                        />
                                     </TouchableOpacity>
                                     <TouchableOpacity onPress={() => this.hideAlert()} >  
-                                    <Image
-                                        style={
-                                            {
-                                                height: 32,
-                                                width: 32,
-                                                marginLeft: 10,
+                                        <Image
+                                            style={
+                                                {
+                                                    height: 32,
+                                                    width: 32,
+                                                    marginLeft: 10,
+                                                }
                                             }
-                                        }
-                                        source={{ uri: "https://img.icons8.com/ios/24/000000/cancel.png"}}
-                                    />
+                                            source={{ uri: "https://img.icons8.com/ios/24/000000/cancel.png"}}
+                                        />
                                     </TouchableOpacity>
                                 </View>
-                                
                             </View>
-                            
-
                         </Modal> :
                         <Text></Text>
                     }
+
+                    {/* NOMBRE DE USUARIO Y BOTON DELETE POST */}
                     <View style={styles.viewArriba}>
                         <Text style={styles.infoUser}> @{this.props.postData.data.name} </Text>
                         {
@@ -173,53 +170,49 @@ class Post extends Component {
                             }
                         }
                         source={{ uri: this.props.postData.data.photo }}
-
                     />
-                    
 
                     {/* INFO POSTEO */}
                     <View style={styles.infoContainer}>
-
                         <View style={styles.likesycomments}>
+
                             {/* LIKES */}
                             <View style={styles.likes}>
                                 
-                                {
-                                    this.state.myLike == false ?
-                                        <TouchableOpacity onPress={() => this.darLike()}>
-                                            <Image
-                                                style={
-                                                    {
-                                                        height: 22,
-                                                        width: 22,
-                                                        alignSelf: 'left',
-                                                        marginBottom: 10,
-                                                        marginLeft: 5
-                                                    }
+                                {this.state.myLike == false ?
+                                    <TouchableOpacity onPress={() => this.darLike()}>
+                                        <Image
+                                            style={
+                                                {
+                                                    height: 22,
+                                                    width: 22,
+                                                    alignSelf: 'left',
+                                                    marginBottom: 10,
+                                                    marginLeft: 5
                                                 }
-                                                source={{ uri: "https://img.icons8.com/small/16/000000/like.png" }}
-
-                                            />
-                                        </TouchableOpacity> :
-
-                                        <TouchableOpacity onPress={() => this.quitarLike()}>
-                                            <Image
-                                                style={
-                                                    {
-                                                        height: 22,
-                                                        width: 22,
-                                                        alignSelf: 'left',
-                                                        marginBottom: 10,
-                                                        marginLeft: 5
-                                                    }
+                                            }
+                                            source={{ uri: "https://img.icons8.com/small/16/000000/like.png" }}
+                                        />
+                                    </TouchableOpacity> :
+                                    <TouchableOpacity onPress={() => this.quitarLike()}>
+                                        <Image
+                                            style={
+                                                {
+                                                    height: 22,
+                                                    width: 22,
+                                                    alignSelf: 'left',
+                                                    marginBottom: 10,
+                                                    marginLeft: 5
                                                 }
-                                                source={{ uri: "https://img.icons8.com/ios-glyphs/30/fa314a/like--v1.png" }}
-                                            />
-                                        </TouchableOpacity>
+                                            }
+                                            source={{ uri: "https://img.icons8.com/ios-glyphs/30/fa314a/like--v1.png" }}
+                                        />
+                                    </TouchableOpacity>
                                 }
                                 <Text style={styles.infoPostLike}> {this.state.likes} </Text>
                             </View>
-                            {/* COMENTARIOS */}
+
+                            {/* ICONO COMENTARIOS */}
                             <View>
                                 {this.props.postData.data.comments === undefined ?
                                     <View  style={styles.comments}>
@@ -257,19 +250,16 @@ class Post extends Component {
                                         </TouchableOpacity>
                                         <Text style={styles.infoPostComment}>{this.props.postData.data.comments.length} </Text>
                                     </View>
-                                    
                                 }
                             </View>
                         </View>
 
                         
-                        {/* DESCRIPCION */}
+                        {/* DESCRIPCION Y BOTON PARA VER COMENTARIOS*/}
                         <Text style={styles.infoPost}>@{this.props.postData.data.name}: {this.props.postData.data.texto}</Text>
                         <TouchableOpacity onPress={() => this.showModal()}>
                                 <Text style={styles.showComments} >Show Comments</Text>
                         </TouchableOpacity>
-
-                        
                     </View>
 
                     {/* MODAL PARA COMENTARIOS */}
@@ -317,7 +307,6 @@ class Post extends Component {
                                         </TouchableOpacity>
                                     }
                                 </View>
-
                             </View>
                         </Modal> :
 
