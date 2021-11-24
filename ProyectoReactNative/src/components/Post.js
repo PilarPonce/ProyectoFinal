@@ -166,8 +166,8 @@ class Post extends Component {
                     <Image
                         style={
                             {
-                                height: 270,
-                                width: 401,
+                                height: 300,
+                                width: 450,
                                 alignSelf: 'center',
                                 marginBottom: 20,
                             }
@@ -175,6 +175,7 @@ class Post extends Component {
                         source={{ uri: this.props.postData.data.photo }}
 
                     />
+                    
 
                     {/* INFO POSTEO */}
                     <View style={styles.infoContainer}>
@@ -186,8 +187,6 @@ class Post extends Component {
                                 {
                                     this.state.myLike == false ?
                                         <TouchableOpacity onPress={() => this.darLike()}>
-                                            {/* <Text>Like</Text> */}
-
                                             <Image
                                                 style={
                                                     {
@@ -195,7 +194,6 @@ class Post extends Component {
                                                         width: 22,
                                                         alignSelf: 'left',
                                                         marginBottom: 10,
-                                                        //marginTop: 3,
                                                         marginLeft: 5
                                                     }
                                                 }
@@ -212,7 +210,6 @@ class Post extends Component {
                                                         width: 22,
                                                         alignSelf: 'left',
                                                         marginBottom: 10,
-                                                        //marginTop: 3,
                                                         marginLeft: 5
                                                     }
                                                 }
@@ -226,36 +223,38 @@ class Post extends Component {
                             <View>
                                 {this.props.postData.data.comments === undefined ?
                                     <View  style={styles.comments}>
-                                    <Image
-                                            style={
-                                                {
-                                                    height: 22,
-                                                    width: 22,
-                                                    alignSelf: 'left',
-                                                    marginBottom: 10,
-                                                    //marginTop: 3,
-                                                    marginLeft: 5
-                                                }
-                                            }
-                                            source={{ uri: "https://img.icons8.com/material-outlined/24/000000/filled-topic.png" }}
-                                        />
-                                        <Text style={styles.infoPostComment}>0 </Text>
-                                    </View>
-                                    :
-                                    <View  style={styles.comments}>
-                                        <Image
+                                        <TouchableOpacity onPress={() => this.showModal()}>
+                                            <Image
                                                 style={
                                                     {
                                                         height: 22,
                                                         width: 22,
                                                         alignSelf: 'left',
                                                         marginBottom: 10,
-                                                        //marginTop: 3,
                                                         marginLeft: 5
                                                     }
                                                 }
                                                 source={{ uri: "https://img.icons8.com/material-outlined/24/000000/filled-topic.png" }}
                                             />
+                                        </TouchableOpacity>
+                                            <Text style={styles.infoPostComment}>0 </Text>
+                                    </View>
+                                    :
+                                    <View  style={styles.comments}>
+                                        <TouchableOpacity onPress={() => this.showModal()}>
+                                            <Image
+                                                style={
+                                                    {
+                                                        height: 22,
+                                                        width: 22,
+                                                        alignSelf: 'left',
+                                                        marginBottom: 10,
+                                                        marginLeft: 5
+                                                    }
+                                                }
+                                                source={{ uri: "https://img.icons8.com/material-outlined/24/000000/filled-topic.png" }}
+                                            />
+                                        </TouchableOpacity>
                                         <Text style={styles.infoPostComment}>{this.props.postData.data.comments.length} </Text>
                                     </View>
                                     
@@ -282,11 +281,15 @@ class Post extends Component {
                                 </TouchableOpacity>
 
                                 {this.props.postData.data.comments === undefined ?
-                                    <Text >No comments yet! Make the first one </Text> :
+                                    <Text style={styles.noComments}>No comments yet! Make the first one </Text> :
 
                                     <View>
-                                        <Text>Comments:</Text>
+                                        {this.props.postData.data.name ?
+                                            <Text  style={styles.tituloComentarios}>Comments of @{this.props.postData.data.name}'s post</Text>:
+                                            <Text style={styles.tituloComentarios}>Comments</Text>
+                                        }
                                         <FlatList
+                                            style={styles.comentarios}
                                             data={this.props.postData.data.comments}
                                             keyextractor={(comment) => comment.createdAt.toString()}
                                             renderItem={({ item }) => <Text>{item.author}: {item.comment}</Text>}
@@ -335,13 +338,34 @@ const styles = StyleSheet.create({
         height: '100%',
         alignItems: 'center'
     },
+    tituloComentarios:{
+        display: 'flex',
+        alignSelf: 'center',
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 10,
+        marginTop: 5
+    },
+    comentarios:{
+        margin: 5,
+        fontSize: 15,
+        margin: 10
+    },
+    noComments:{
+        fontSize: 18,
+        marginLeft: 10,
+        marginBottom: 30,
+        marginTop: 10
+    },
     contanier: {
         marginBottom: 20,
         borderRadius: 12,
         borderColor: "#ccc",
         borderWidth: 1,
         padding: 10,
-        width: 450,
+        width: '90%',
+        display: 'flex',
+        alignSelf: 'center',
         backgroundColor: 'white',
         paddingBottom: '5%',
         marginVertical: 10,
