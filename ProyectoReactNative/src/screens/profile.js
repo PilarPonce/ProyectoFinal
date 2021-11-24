@@ -60,7 +60,7 @@ class Profile extends Component {
           
 
           <TouchableOpacity onPress={() => this.showModal()} style={styles.info}>
-            <Text style={styles.userInformation}> tap here to see more user information </Text>
+            <Text style={styles.userInformation}> Tap here to see more user information </Text>
           </TouchableOpacity>
 
           <Text style={styles.user}>  @{this.props.userData.displayName}</Text>
