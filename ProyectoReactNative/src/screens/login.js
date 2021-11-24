@@ -10,13 +10,15 @@ class Login extends Component{
         }
     }
 
-    redireccionar () {
-        this.props.drawerProps.navigation.navigate('Register')
-    }
+    // redireccionar () {
+    //     this.props.drawerProps.navigation.navigate('Register')
+    // }
 
     render(){
         console.log(this.props.login);
         return(
+
+            // FORMULARIO
             <View style={styles.formContainer}>
                 <TextInput
                     style={styles.input}
@@ -31,6 +33,7 @@ class Login extends Component{
                     secureTextEntry={true}
                 />
 
+               
                 {this.state.email && this.state.password ?
                 <TouchableOpacity style={styles.button} onPress={()=>this.props.login(this.state.email, this.state.password)}>
                     <Text style={styles.textButton}>Log in</Text>    
@@ -39,7 +42,7 @@ class Login extends Component{
                 <Text>I'm disabled</Text>
                 </TouchableOpacity>
                 }
-                <TouchableOpacity onPress= {()=> this.redireccionar()}><Text >Don´t have an account? Sign up </Text> </TouchableOpacity>
+                <TouchableOpacity onPress={() => this.props.drawerProps.navigation.navigate('Register')}><Text >Don´t have an account? Sign up </Text> </TouchableOpacity>
 
                 <Text style={styles.mensajeError}> {this.props.errorLogin} </Text>
             </View>
@@ -49,6 +52,7 @@ class Login extends Component{
 
 const styles = StyleSheet.create({
     formContainer:{
+        backgroundColor: 'white',
         paddingHorizontal:10,
         marginTop: 20,
     },

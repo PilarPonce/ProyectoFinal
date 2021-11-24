@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
+
 class Register extends Component {
     constructor(props) {
         super(props)
@@ -13,7 +14,7 @@ class Register extends Component {
 
     render() {
         return (
-            <React.Fragment>
+            <React.Fragment style= {{backgroundColor: 'white'}}>
                 <View>
                     <Image 
                         style={{height: 300,
@@ -56,16 +57,21 @@ class Register extends Component {
                     }
                     
                     <Text style={styles.mensajeError}> {this.props.errorRegister} </Text>
-                </View> </React.Fragment>
+                </View> 
+                </React.Fragment>
             
         )
     }
 }
 
 const styles = StyleSheet.create({
+    body: {
+        backgroundColor: 'white'
+    },
     registerContainer: {
         paddingHorizontal: 10,
         marginTop: 20,
+        backgroundColor: 'white',
     },
     input: {
         height: 20,
