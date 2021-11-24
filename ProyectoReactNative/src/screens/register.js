@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
 class Register extends Component {
     constructor(props) {
@@ -13,36 +13,50 @@ class Register extends Component {
 
     render() {
         return (
-            <View style={styles.registerContainer}>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={(text) => this.setState({ email: text })}
-                    placeholder='email'
-                    keyboardType='email-address' />
-                <TextInput
-                    style={styles.input}
-                    onChangeText={(text) => this.setState({ userName: text })}
-                    placeholder='user name'
-                    keyboardType='default' />
-                <TextInput
-                    style={styles.input}
-                    onChangeText={(text) => this.setState({ password: text })}
-                    placeholder='password'
-                    keyboardType='email-address'
-                    secureTextEntry={true}
-                />
+            <React.Fragment>
+                <View>
+                    <Image 
+                        style={{height: 300,
+                                width: 300,
+                                display: 'flex',
+                                alignContent: 'center'
+                                }}
+                        source= {require('../../assets/logo.jpg')}
+                        resizeMode= 'contain'
+                    />
+                </View>
 
-                {this.state.email && this.state.userName && this.state.password ?
-                <TouchableOpacity style={styles.button} onPress={() => this.props.register(this.state.email, this.state.password, this.state.userName)} >
-                    <Text style={styles.textButton}>Register</Text>
-                </TouchableOpacity> : 
-                <TouchableOpacity style={styles.buttonDisabled} disabled={true} >
-                <Text>I'm disabled</Text>
-                </TouchableOpacity>
-                }
+                <View style={styles.registerContainer}>
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={(text) => this.setState({ email: text })}
+                        placeholder='email'
+                        keyboardType='email-address' />
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={(text) => this.setState({ userName: text })}
+                        placeholder='user name'
+                        keyboardType='default' />
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={(text) => this.setState({ password: text })}
+                        placeholder='password'
+                        keyboardType='email-address'
+                        secureTextEntry={true}
+                    />
 
-                <Text style={styles.mensajeError}> {this.props.errorRegister} </Text>
-            </View>
+                    {this.state.email && this.state.userName && this.state.password ?
+                        <TouchableOpacity style={styles.button} onPress={() => this.props.register(this.state.email, this.state.password, this.state.userName)} >
+                            <Text style={styles.textButton}>Register</Text>
+                        </TouchableOpacity> :
+                        <TouchableOpacity style={styles.buttonDisabled} disabled={true} >
+                            <Text>I'm disabled</Text>
+                        </TouchableOpacity>
+                    }
+
+                    <Text style={styles.mensajeError}> {this.props.errorRegister} </Text>
+                </View> </React.Fragment>
+            
         )
     }
 }
