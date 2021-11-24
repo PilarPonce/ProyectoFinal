@@ -41,7 +41,7 @@ class Search extends Component{
       render(){
           console.log(this.state.posteos);
           return(
-              <View>
+              <View style={styles.todo}>
 
                   <TextInput
                         style={styles.input}
@@ -83,8 +83,12 @@ class Search extends Component{
 }
 
 const styles = StyleSheet.create({
+    todo: {
+      backgroundColor: 'white',
+      height: '100%'
+    },
     botonSearch: {
-      width: '100%',
+      width: '95%',
       height: 35,
       backgroundColor: '#FAE0E4',
       textAlign: 'center',
@@ -94,7 +98,9 @@ const styles = StyleSheet.create({
       borderStyle: 'solid',
       borderColor: 'black',
       marginTop: 15,
-      marginBottom: 15
+      marginBottom: 15,
+      display: 'flex',
+      alignSelf: 'center'
     },
     formContainer:{
         paddingHorizontal:10,
@@ -110,7 +116,11 @@ const styles = StyleSheet.create({
         borderColor: '#ccc',
         borderStyle: 'solid',
         borderRadius: 6,
-        marginVertical:10,
+        marginBottom:10,
+        marginTop: 15,
+        width: '95%',
+        display: 'flex',
+        alignSelf: 'center'
     },
     button:{
         backgroundColor:'#28a745',
