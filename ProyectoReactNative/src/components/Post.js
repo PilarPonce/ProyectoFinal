@@ -502,6 +502,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         display: 'flex',
         alignSelf: 'center',
+        textAlign: 'center'
     }
 
 })
