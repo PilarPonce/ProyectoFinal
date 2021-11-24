@@ -166,8 +166,8 @@ class Post extends Component {
                     <Image
                         style={
                             {
-                                height: 370,
-                                width: 550,
+                                height: 270,
+                                width: 401,
                                 alignSelf: 'center',
                                 marginBottom: 20,
                             }
@@ -332,7 +332,8 @@ const styles = StyleSheet.create({
     body: {
         //backgroundColor: 'white',
         width: '100%',
-        height: '100%'
+        height: '100%',
+        alignItems: 'center'
     },
     contanier: {
         marginBottom: 20,
@@ -340,7 +341,7 @@ const styles = StyleSheet.create({
         borderColor: "#ccc",
         borderWidth: 1,
         padding: 10,
-        width: '100%',
+        width: 450,
         backgroundColor: 'white',
         paddingBottom: '5%',
         marginVertical: 10,
@@ -392,6 +393,8 @@ const styles = StyleSheet.create({
 
     infoContainer: {
         backgroundColor: 'white',
+        height: 90,
+        
 
     },
 
