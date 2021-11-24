@@ -136,18 +136,19 @@ const styles = StyleSheet.create({
 
   info: {
     marginLeft: '60%', 
-    marginTop: '1%'
+    marginTop: '1%',
+    
     
   },
   modalInformation: {
     backgroundColor: '#FAE0E4',
     width: '90%',
-    height: '17vh',
+    height: 150,
     borderRadius: 4,
     padding: 5,
     alignSelf: 'center',
     boxShadow: 'rgb(204 204 204) 0px 0px 9px 7px',
-    marginTop: '50%',
+    marginTop: 200,
     marginBottom: 200,
 },
   anyPost: {
