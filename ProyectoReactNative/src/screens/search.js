@@ -46,7 +46,7 @@ class Search extends Component{
                   <TextInput
                         style={styles.input}
                         onChangeText={(text)=>this.setState({textoBuscador: text})}
-                        placeholder='Search here'
+                        placeholder='Search by email'
                         keyboardType='default'
                         value={this.state.textoBuscador}    
                         />
