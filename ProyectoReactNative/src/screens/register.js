@@ -17,9 +17,10 @@ class Register extends Component {
                 <View>
                     <Image 
                         style={{height: 300,
-                                width: 300,
+                                width: '100%',
                                 display: 'flex',
-                                alignContent: 'center'
+                                alignContent: 'center', 
+                                flexDirection: 'row'
                                 }}
                         source= {require('../../assets/logo.jpg')}
                         resizeMode= 'contain'
@@ -53,6 +54,10 @@ class Register extends Component {
                             <Text>I'm disabled</Text>
                         </TouchableOpacity>
                     }
+
+                   
+                    <TouchableOpacity >   <Text >Don´t have an account? Sign up </Text> </TouchableOpacity>
+                    
 
                     <Text style={styles.mensajeError}> {this.props.errorRegister} </Text>
                 </View> </React.Fragment>
