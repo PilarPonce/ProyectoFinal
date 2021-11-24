@@ -112,37 +112,62 @@ class Post extends Component {
 
                     {/* DELETE POST */}
                     {
-                        this.props.postData.data.owner == auth.currentUser.email ?
-                        <TouchableOpacity onPress={() => this.showAlert()} style={styles.botonDeletePost}>
-                                <Text style={styles.textBoton}>DELETE</Text>
-                        </TouchableOpacity>
-                    
-                            :
-
-                            <Text></Text>
-                    }
-                        {
-                            this.state.showAlert ? 
-                            <Modal visible={this.state.showAlert} animationType='slide' transparent={true}>
-                                <View style={styles.modalComentarios}> 
-                                    <Text> Are you sure you want to delete this post?</Text>
-                                    <TouchableOpacity onPress={() => this.deletePost()}>  <Text> YES </Text></TouchableOpacity>
-                                    <TouchableOpacity onPress={() => this.hideAlert()}>  <Text> NO </Text></TouchableOpacity>
+                        this.state.showAlert ? 
+                        <Modal visible={this.state.showAlert} animationType='slide' transparent={true}>
+                            <View style={styles.modalBorrar}> 
+                                <Text style={styles.mensajeBorrar}> Are you sure you want to delete this post?</Text>
+                                <View style={styles.viewBorrar}>
+                                    <TouchableOpacity onPress={() => this.deletePost()} >  
+                                    <Image
+                                        style={
+                                            {
+                                                height: 30,
+                                                width: 30,
+                                                marginRight: 10,
+                                            }
+                                        }
+                                        source={{ uri: "https://img.icons8.com/external-dreamstale-lineal-dreamstale/32/000000/external-confirm-interface-dreamstale-lineal-dreamstale.png"}}
+                                    />
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => this.hideAlert()} >  
+                                    <Image
+                                        style={
+                                            {
+                                                height: 32,
+                                                width: 32,
+                                                marginLeft: 10,
+                                            }
+                                        }
+                                        source={{ uri: "https://img.icons8.com/ios/24/000000/cancel.png"}}
+                                    />
+                                    </TouchableOpacity>
                                 </View>
                                 
+                            </View>
+                            
 
-                            </Modal> :
-                            <Text></Text>
+                        </Modal> :
+                        <Text></Text>
+                    }
+                    <View style={styles.viewArriba}>
+                        <Text style={styles.infoUser}> @{this.props.postData.data.name} </Text>
+                        {
+                            this.props.postData.data.owner == auth.currentUser.email ?
+                            <TouchableOpacity onPress={() => this.showAlert()} style={styles.botonDeletePost}>
+                                    <Text style={styles.textBoton}>DELETE</Text>
+                            </TouchableOpacity>              
+                                :
+                                <Text></Text>
                         }
-                        
-                    <Text style={styles.infoUser}> @{this.props.postData.data.name} </Text>
+                    </View>  
+                    
 
                     {/* IMAGEN */}
                     <Image
                         style={
                             {
-                                height: 370,
-                                width: 550,
+                                height: 270,
+                                width: 401,
                                 alignSelf: 'center',
                                 marginBottom: 20,
                             }
@@ -154,64 +179,98 @@ class Post extends Component {
                     {/* INFO POSTEO */}
                     <View style={styles.infoContainer}>
 
-                        {/* LIKES */}
-                        <View style={styles.likes}>
-                            <Text style={styles.infoPostLike}> {this.state.likes} like  </Text>
-                            {
-                                this.state.myLike == false ?
-                                    <TouchableOpacity onPress={() => this.darLike()}>
-                                        {/* <Text>Like</Text> */}
+                        <View style={styles.likesycomments}>
+                            {/* LIKES */}
+                            <View style={styles.likes}>
+                                
+                                {
+                                    this.state.myLike == false ?
+                                        <TouchableOpacity onPress={() => this.darLike()}>
+                                            {/* <Text>Like</Text> */}
 
-                                        <Image
+                                            <Image
+                                                style={
+                                                    {
+                                                        height: 22,
+                                                        width: 22,
+                                                        alignSelf: 'left',
+                                                        marginBottom: 10,
+                                                        //marginTop: 3,
+                                                        marginLeft: 5
+                                                    }
+                                                }
+                                                source={{ uri: "https://img.icons8.com/small/16/000000/like.png" }}
+
+                                            />
+                                        </TouchableOpacity> :
+
+                                        <TouchableOpacity onPress={() => this.quitarLike()}>
+                                            <Image
+                                                style={
+                                                    {
+                                                        height: 22,
+                                                        width: 22,
+                                                        alignSelf: 'left',
+                                                        marginBottom: 10,
+                                                        //marginTop: 3,
+                                                        marginLeft: 5
+                                                    }
+                                                }
+                                                source={{ uri: "https://img.icons8.com/ios-glyphs/30/fa314a/like--v1.png" }}
+                                            />
+                                        </TouchableOpacity>
+                                }
+                                <Text style={styles.infoPostLike}> {this.state.likes} </Text>
+                            </View>
+                            {/* COMENTARIOS */}
+                            <View>
+                                {this.props.postData.data.comments === undefined ?
+                                    <View  style={styles.comments}>
+                                    <Image
                                             style={
                                                 {
-                                                    height: 18,
-                                                    width: 18,
+                                                    height: 22,
+                                                    width: 22,
                                                     alignSelf: 'left',
                                                     marginBottom: 10,
-                                                    marginTop: 10,
+                                                    //marginTop: 3,
+                                                    marginLeft: 5
                                                 }
                                             }
-                                            source={{ uri: "https://img.icons8.com/small/16/000000/like.png" }}
-
+                                            source={{ uri: "https://img.icons8.com/material-outlined/24/000000/filled-topic.png" }}
                                         />
-                                    </TouchableOpacity> :
-
-                                    <TouchableOpacity onPress={() => this.quitarLike()}>
+                                        <Text style={styles.infoPostComment}>0 </Text>
+                                    </View>
+                                    :
+                                    <View  style={styles.comments}>
                                         <Image
-                                            style={
-                                                {
-                                                    height: 18,
-                                                    width: 18,
-                                                    alignSelf: 'left',
-                                                    marginBottom: 10,
-                                                    marginTop: 10,
+                                                style={
+                                                    {
+                                                        height: 22,
+                                                        width: 22,
+                                                        alignSelf: 'left',
+                                                        marginBottom: 10,
+                                                        //marginTop: 3,
+                                                        marginLeft: 5
+                                                    }
                                                 }
-                                            }
-                                            source={{ uri: "https://img.icons8.com/ios-glyphs/30/fa314a/like--v1.png" }}
-                                        />
-                                    </TouchableOpacity>
-                            }
+                                                source={{ uri: "https://img.icons8.com/material-outlined/24/000000/filled-topic.png" }}
+                                            />
+                                        <Text style={styles.infoPostComment}>{this.props.postData.data.comments.length} </Text>
+                                    </View>
+                                    
+                                }
+                            </View>
                         </View>
 
-
-
-
+                        
                         {/* DESCRIPCION */}
                         <Text style={styles.infoPost}>@{this.props.postData.data.name}: {this.props.postData.data.texto}</Text>
-
-                        {/* COMENTARIOS */}
-                        <View>
-                            {this.props.postData.data.comments === undefined ?
-                                <Text style={styles.infoPost}> 0 comments</Text>
-                                :
-                                <Text style={styles.infoPost}>Comments: {this.props.postData.data.comments.length} </Text>
-                            }
-
-                            <TouchableOpacity onPress={() => this.showModal()}>
+                        <TouchableOpacity onPress={() => this.showModal()}>
                                 <Text style={styles.showComments} >Show Comments</Text>
-                            </TouchableOpacity>
-                        </View>
+                        </TouchableOpacity>
+
+                        
                     </View>
 
                     {/* MODAL PARA COMENTARIOS */}
@@ -273,18 +332,19 @@ const styles = StyleSheet.create({
     body: {
         //backgroundColor: 'white',
         width: '100%',
-        height: '100%'
+        height: '100%',
+        alignItems: 'center'
     },
     contanier: {
         marginBottom: 20,
-        borderRadius: 4,
+        borderRadius: 12,
         borderColor: "#ccc",
         borderWidth: 1,
         padding: 10,
-        width: '100%',
-        height: '100%',
+        width: 450,
         backgroundColor: 'white',
         paddingBottom: '5%',
+        marginVertical: 10,
         
     },
     disabled: {
@@ -299,26 +359,53 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         marginTop: 15,
     },
+    viewArriba:{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        height: 60,
+    },
     infoUser: {
         color: 'black',
-        marginBottom: 20,
+        marginBottom: 15,
         fontSize: 20,
+        marginTop: 10
 
     },
     likes: {
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: 'row',
+        marginRight: 15,
+        marginLeft: 5
+        //marginTop: 5
 
+    },
+    comments: {
+        display: 'flex',
+        flexDirection: 'row',
+        //marginTop: 5
+
+    },
+    likesycomments:{
+        display: 'flex',
+        flexDirection: 'row'
     },
 
     infoContainer: {
         backgroundColor: 'white',
+        height: 90,
+        
 
     },
 
     infoPostLike: {
         fontSize: 16,
         color: 'black',
+    },
+    infoPostComment: {
+        fontSize: 16,
+        color: 'black',
+        marginLeft: 3
     },
 
     infoPost: {
@@ -328,14 +415,16 @@ const styles = StyleSheet.create({
 
     },
     modalComentarios: {
-        backgroundColor: '#FAE0E4',
+        backgroundColor: 'white',
         width: '90%',
-        height: '40vh',
+        height: '42vh',
         borderRadius: 4,
+        borderWidth: 1,
+        borderColor: '#FAE0E4',
         padding: 5,
         alignSelf: 'center',
-        boxShadow: 'rgb(204 204 204) 0px 0px 9px 7px',
-        marginTop: '50%',
+        boxShadow: 'grey 0px 0px 9px 7px',
+        marginTop: 150,
         marginBottom: 200,
     },
     showComments: {
@@ -356,7 +445,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: 'black',
-        marginBottom: 5,
+        marginBottom: 18,
         display: 'flex',
         alignSelf: 'flex-end'
     },
@@ -391,6 +480,33 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderColor: '#FBB1BD'
     },
+    modalBorrar:{
+        backgroundColor: 'white',
+        width: '50%',
+        height: 125,
+        borderRadius: 6,
+        padding: 5,
+        borderColor: '#FBB1BD',
+        borderWidth: 1,
+        alignSelf: 'center',
+        boxShadow: 'grey 0px 0px 9px 7px',
+        marginTop: 200,
+        marginBottom: '50%',
+    },
+    viewBorrar:{
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        alignSelf: 'center',
+        marginTop: 10
+    },
+    mensajeBorrar:{
+        fontSize: 20,
+        fontWeight: 'bold',
+        display: 'flex',
+        alignSelf: 'center',
+        textAlign: 'center'
+    }
 
 })
 
