@@ -14,12 +14,12 @@ class Register extends Component {
     render() {
         return (
             <React.Fragment>
-                <View>
+                <View style={styles.logo}>
                     <Image 
                         style={{height: 300,
                                 width: 300,
                                 display: 'flex',
-                                alignContent: 'center'
+                                alignContent: 'center',
                                 }}
                         source= {require('../../assets/logo.jpg')}
                         resizeMode= 'contain'
@@ -62,6 +62,9 @@ class Register extends Component {
 }
 
 const styles = StyleSheet.create({
+    logo: {
+        alignItems: 'center'
+    },
     registerContainer: {
         paddingHorizontal: 10,
         marginTop: 20,
