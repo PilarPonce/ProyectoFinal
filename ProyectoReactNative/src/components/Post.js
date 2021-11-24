@@ -480,14 +480,14 @@ const styles = StyleSheet.create({
     modalBorrar:{
         backgroundColor: 'white',
         width: '50%',
-        height: '12vh',
+        height: 125,
         borderRadius: 6,
         padding: 5,
         borderColor: '#FBB1BD',
         borderWidth: 1,
         alignSelf: 'center',
         boxShadow: 'grey 0px 0px 9px 7px',
-        marginTop: '50%',
+        marginTop: 200,
         marginBottom: '50%',
     },
     viewBorrar:{
