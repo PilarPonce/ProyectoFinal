@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     padding: 5,
     alignSelf: 'center',
     boxShadow: 'rgb(204 204 204) 0px 0px 9px 7px',
-    marginTop: '50%',
+    marginTop: '25%',
   },
   anyPost: {
     marginTop: '1%', 
