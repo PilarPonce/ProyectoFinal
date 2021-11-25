@@ -434,7 +434,7 @@ const styles = StyleSheet.create({
         padding: 5,
         alignSelf: 'center',
         boxShadow: 'grey 0px 0px 9px 7px',
-        marginTop: '23%',
+        marginTop: '50%',
     },
     showComments: {
         backgroundColor: '#FAE0E4',
